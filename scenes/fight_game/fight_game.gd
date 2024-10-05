@@ -38,12 +38,16 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if (event.is_action("Attack")):
+	#if not get_viewport_rect().has_point(event.position):
+		#print_debug("not in viewport")
+		#return
+	if (event.is_action_pressed("Attack")):
 		if (current_attack != null):
 			return
 		if (current_weapon == WEAPON.SLAP):
 			current_attack = slap_attack.instantiate()
-			current_attack.position = event.position
+			#current_attack.position = event.position
+			current_attack.position = get_global_mouse_position() - position
 			current_attack.attack_ended.connect(_attack_ended)
 			add_child(current_attack)
 

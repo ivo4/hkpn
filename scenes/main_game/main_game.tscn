@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://fthb7bhebrxs"]
+
+[ext_resource type="Script" path="res://scenes/main_game/main_game.gd" id="1_q5wl0"]
+[ext_resource type="PackedScene" uid="uid://b15db2i8qrcjd" path="res://scenes/match_three/match_three.tscn" id="2_2yqlu"]
+[ext_resource type="PackedScene" uid="uid://1w71n7uatf7b" path="res://scenes/fight_game/fight_game.tscn" id="3_ygm8n"]
+[ext_resource type="PackedScene" uid="uid://c7lk6ud4k38j0" path="res://scenes/main_game/annoyance_meter.tscn" id="4_yric5"]
+
+[node name="MainGame" type="Node2D"]
+script = ExtResource("1_q5wl0")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="MatchThree" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_2yqlu")]
+
+[node name="SubViewportContainer2" type="SubViewportContainer" parent="."]
+offset_left = 607.0
+offset_top = 7.0
+offset_right = 647.0
+offset_bottom = 47.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer2"]
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="FightGame" parent="SubViewportContainer2/SubViewport" instance=ExtResource("3_ygm8n")]
+
+[node name="AnnoyanceMeter" parent="." instance=ExtResource("4_yric5")]
+position = Vector2(612, 544)
+
+[connection signal="damage" from="SubViewportContainer2/SubViewport/FightGame" to="." method="_on_fight_game_damage"]
