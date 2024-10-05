@@ -37,15 +37,18 @@ render_target_update_mode = 4
 position = Vector2(612, 544)
 
 [node name="SprayPowerupButton" parent="." instance=ExtResource("5_fn8f8")]
-position = Vector2(80, 509)
+position = Vector2(79, 540)
 max_value = 64
 current_value = 64
 button_texture = ExtResource("5_nh88p")
 
-[node name="ZapperPowerupButton2" parent="." instance=ExtResource("5_fn8f8")]
-position = Vector2(171, 510)
+[node name="ZapperPowerupButton" parent="." instance=ExtResource("5_fn8f8")]
+position = Vector2(176, 539)
 max_value = 64
 current_value = 20
 button_texture = ExtResource("7_bg5r3")
 
 [connection signal="damage" from="SubViewportContainer2/SubViewport/FightGame" to="." method="_on_fight_game_damage"]
+[connection signal="weapon_activated" from="SubViewportContainer2/SubViewport/FightGame" to="." method="_on_fight_game_weapon_activated"]
+[connection signal="powerup_activated" from="SprayPowerupButton" to="." method="_on_spray_powerup_button_powerup_activated"]
+[connection signal="powerup_activated" from="ZapperPowerupButton" to="." method="_on_zapper_powerup_button_powerup_activated"]
