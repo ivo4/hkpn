@@ -19,9 +19,6 @@ const move_speed = 600
 var is_disappearing = false
 const disappear_speed = 2.4
 
-func _ready():
-	connect("input_event", Callable(self, "_on_input_event"))
-
 func _on_input_event(_viewport: Viewport, event: InputEvent, _shape_idx: int):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
