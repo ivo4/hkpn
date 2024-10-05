@@ -18,3 +18,18 @@ func get_random_tile_color() -> TileColor:
 	var colors = TileColor.values()
 	var index = rng.randi() % colors.size()
 	return colors[index]
+
+func color_to_string(color: TileColor) -> String:
+	match color:
+		TileColor.RED:
+			return "Red"
+		TileColor.GREEN:
+			return "Green"
+		TileColor.BLUE:
+			return "Blue"
+		TileColor.BROWN:
+			return "Brown"
+		TileColor.GRAY:
+			return "Gray"
+
+	return "Unknown"
