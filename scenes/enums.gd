@@ -4,8 +4,9 @@ enum TileColor {
 	RED,
 	GREEN,
 	BLUE,
+	YELLOW,
 	BROWN,
-	GRAY,
+	PURPLE,
 }
 
 var rng: RandomNumberGenerator
@@ -27,9 +28,11 @@ func color_to_string(color: TileColor) -> String:
 			return "Green"
 		TileColor.BLUE:
 			return "Blue"
+		TileColor.YELLOW:
+			return "Yellow"
 		TileColor.BROWN:
 			return "Brown"
-		TileColor.GRAY:
-			return "Gray"
+		TileColor.PURPLE:
+			return "Purple"
 
 	return "Unknown"
