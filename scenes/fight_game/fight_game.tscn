@@ -1,3 +1,88 @@
-[gd_scene format=3 uid="uid://1w71n7uatf7b"]
+[gd_scene load_steps=6 format=3 uid="uid://1w71n7uatf7b"]
+
+[ext_resource type="Script" path="res://scenes/fight_game/fight_game.gd" id="1_sfgrc"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_8t20j"]
+b = Vector2(473, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r86mb"]
+size = Vector2(473, 76)
+
+[sub_resource type="GDScript" id="GDScript_o0vve"]
+resource_name = "ZapperArea"
+script/source = "extends Area2D
+
+var zapper_charge: int = 100
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	monitoring = (zapper_charge > 0)
+	$ColorRect.visible = (zapper_charge > 0)
+
+
+func _on_body_entered(body: Node2D) -> void:
+	if (zapper_charge <= 0):
+		return
+	body.queue_free()
+	zapper_charge -= 10
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k5sve"]
+size = Vector2(473, 20)
 
 [node name="FightGame" type="Node2D"]
+script = ExtResource("1_sfgrc")
+
+[node name="Background" type="ColorRect" parent="."]
+offset_right = 473.0
+offset_bottom = 547.0
+color = Color(0.419813, 0.419813, 0.419813, 1)
+
+[node name="Human" type="Sprite2D" parent="."]
+position = Vector2(237, 496)
+
+[node name="ColorRect" type="ColorRect" parent="Human"]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+
+[node name="MosquitoSpawnTimer" type="Timer" parent="."]
+process_callback = 0
+autostart = true
+
+[node name="MosquitoSpawnArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MosquitoSpawnArea"]
+shape = SubResource("SegmentShape2D_8t20j")
+
+[node name="EndArea" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EndArea"]
+position = Vector2(236.5, 509)
+shape = SubResource("RectangleShape2D_r86mb")
+
+[node name="ZapperArea" type="Area2D" parent="."]
+position = Vector2(236, 461)
+collision_layer = 0
+script = SubResource("GDScript_o0vve")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ZapperArea"]
+shape = SubResource("RectangleShape2D_k5sve")
+
+[node name="ColorRect" type="ColorRect" parent="ZapperArea"]
+offset_left = -236.0
+offset_top = -10.0
+offset_right = 237.0
+offset_bottom = 10.0
+color = Color(0.266667, 1, 1, 0.521569)
+
+[connection signal="timeout" from="MosquitoSpawnTimer" to="." method="_on_mosquito_spawn_timer_timeout"]
+[connection signal="body_entered" from="EndArea" to="." method="_on_end_area_body_entered"]
+[connection signal="body_entered" from="ZapperArea" to="ZapperArea" method="_on_body_entered"]
