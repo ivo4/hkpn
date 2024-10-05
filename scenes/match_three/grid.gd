@@ -112,6 +112,7 @@ func on_drag_end(mouse_pos: Vector2):
 	var diff = get_drag_diff(mouse_pos)
 
 	if (get_drag_neighbour(diff) && diff.length() > tile_size_with_gap * 0.5):
+		# TODO only if would create a match?
 		swap_tiles()
 
 	start_movement(dragged_tile)
@@ -155,6 +156,9 @@ func check_for_matches():
 		for tile in tileMatch:
 			tile.is_disappearing = true
 			animation_count += 1
+
+	# TODO if no matches, check whether any matches are possible to make.
+	# If not, shuffle the board? Or game over.
 
 func find_matches():
 	var matches = []
