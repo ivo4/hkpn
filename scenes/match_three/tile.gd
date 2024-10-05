@@ -4,6 +4,7 @@ class_name Tile
 
 signal drag_started
 signal movement_ended
+signal disappeared
 
 var index: Vector2
 var color: Enums.TileColor = Enums.get_random_tile_color()
@@ -13,7 +14,10 @@ var drag_start_pos: Vector2
 
 var is_moving = false
 var moving_to: Vector2
-const move_speed = 400
+const move_speed = 600
+
+var is_disappearing = false
+const disappear_speed = 2.4
 
 func _ready():
 	connect("input_event", Callable(self, "_on_input_event"))
@@ -41,3 +45,10 @@ func _process(delta: float):
 			is_moving = false
 			emit_signal("movement_ended", self)
 			z_index = 0
+
+	if is_disappearing:
+		modulate.a -= disappear_speed * delta
+
+		if modulate.a <= 0:
+			emit_signal("disappeared", self)
+			queue_free()

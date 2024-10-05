@@ -2,6 +2,8 @@ extends Area2D
 
 @export var tile_scene: PackedScene
 
+signal matched
+
 const rows: int = 7
 const columns: int = 7
 const tile_size: int = 64
@@ -21,19 +23,20 @@ func _ready():
 		tiles[x].resize(rows)
 
 		for y in range(rows):
-			var tile: Tile = tile_scene.instantiate()
-			tile.index = Vector2(x, y)
-			reset_position(tile)
-			tile.connect("drag_started", Callable(self, "_on_tile_drag_started"))
-			tile.connect("movement_ended", Callable(self, "_on_tile_movement_ended"))
-			add_child(tile)
-			tiles[x][y] = tile
+			add_tile(x, y)
 
-	var matches = find_matches()
+	check_for_matches()
 
-	# TODO remove
-	for tileMatch in matches:
-		print("Match: " + ", ".join(tileMatch.map(func(tile): return str(tile.index))))
+func add_tile(x: int, y: int):
+	var tile: Tile = tile_scene.instantiate()
+	tile.index = Vector2(x, y)
+	reset_position(tile)
+	tile.connect("drag_started", Callable(self, "_on_tile_drag_started"))
+	tile.connect("movement_ended", Callable(self, "_on_tile_movement_ended"))
+	tile.connect("disappeared", Callable(self, "_on_tile_disappeared"))
+	add_child(tile)
+	tiles[x][y] = tile
+	return tile
 
 func _on_tile_drag_started(tile: Tile):
 	if !animation_count:
@@ -42,6 +45,16 @@ func _on_tile_drag_started(tile: Tile):
 
 func _on_tile_movement_ended(_tile: Tile):
 	animation_count -= 1
+
+	if !animation_count:
+		check_for_matches()
+
+func _on_tile_disappeared(tile: Tile):
+	animation_count -= 1
+	tiles[tile.index.x][tile.index.y] = null
+
+	if !animation_count:
+		fill_empty_spaces()
 
 func _input(event):
 	if dragged_tile:
@@ -90,20 +103,22 @@ func get_drag_neighbour(diff: Vector2) -> Tile:
 	else:
 		return null
 
+func start_movement(tile: Tile):
+	tile.moving_to = get_default_pos(tile.index)
+	tile.is_moving = true
+	animation_count += 1
+
 func on_drag_end(mouse_pos: Vector2):
 	var diff = get_drag_diff(mouse_pos)
 
 	if (get_drag_neighbour(diff) && diff.length() > tile_size_with_gap * 0.5):
+		# TODO only if would create a match?
 		swap_tiles()
 
-	dragged_tile.moving_to = get_default_pos(dragged_tile.index)
-	dragged_tile.is_moving = true
-	animation_count += 1
+	start_movement(dragged_tile)
 
 	if neighbour_tile:
-		neighbour_tile.moving_to = get_default_pos(neighbour_tile.index)
-		neighbour_tile.is_moving = true
-		animation_count += 1
+		start_movement(neighbour_tile)
 
 	dragged_tile.on_drag_end()
 	dragged_tile = null
@@ -126,6 +141,24 @@ func reset_position(tile: Tile):
 
 func is_valid_index(index: Vector2) -> bool:
 	return index.x >= 0 and index.x < columns and index.y >= 0 and index.y < rows
+
+func check_for_matches():
+	var matches = find_matches()
+
+	for tileMatch in matches:
+		var count = tileMatch.size()
+		var color = tileMatch[0].color
+		emit_signal("matched", count, color)
+
+		# TODO remove
+		print("Matched ", count, " ", Enums.color_to_string(color))
+
+		for tile in tileMatch:
+			tile.is_disappearing = true
+			animation_count += 1
+
+	# TODO if no matches, check whether any matches are possible to make.
+	# If not, shuffle the board? Or game over.
 
 func find_matches():
 	var matches = []
@@ -207,3 +240,22 @@ func merge_matches(existingMatch: Array, newMatch: Array):
 	for tile in newMatch:
 		if !existingMatch.has(tile):
 			existingMatch.append(tile)
+
+func fill_empty_spaces():
+	for x in range(columns):
+		var shift = 0
+
+		for y in range(rows - 1, -1, -1):
+			if !tiles[x][y]:
+				shift += 1
+			elif shift:
+				var tile = tiles[x][y]
+				tile.index.y += shift
+				tiles[x][tile.index.y] = tiles[x][y]
+				tiles[x][y] = null
+				start_movement(tile)
+
+		for y in range(shift):
+			var tile = add_tile(x, y)
+			tile.position += Vector2(0, -shift * tile_size_with_gap)
+			start_movement(tile)
