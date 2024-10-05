@@ -1,6 +1,8 @@
 @tool
 extends Node2D
 
+signal powerup_activated
+
 @export var max_value: int = 100
 @export var current_value: int:
 	get:
@@ -31,3 +33,12 @@ func _process(_delta: float) -> void:
 
 func _on_texture_button_pressed() -> void:
 	print("powerup clicked")
+	powerup_activated.emit()
+
+
+func reset_value() -> void:
+	current_value = 0
+
+
+func increase_value(value: int) -> void:
+	current_value += value

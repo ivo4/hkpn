@@ -2,7 +2,7 @@ extends Area2D
 
 @export var tile_scene: PackedScene
 
-signal matched
+signal matched(count: int, color: Enums.TileColor)
 
 const rows: int = 7
 const columns: int = 7
@@ -25,7 +25,7 @@ func _ready():
 		for y in range(rows):
 			add_tile(x, y)
 
-	check_for_matches()
+	self.call_deferred("check_for_matches")
 
 func add_tile(x: int, y: int):
 	var tile: Tile = tile_scene.instantiate()

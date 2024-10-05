@@ -9,6 +9,11 @@ enum TileColor {
 	PURPLE,
 }
 
+enum WEAPON {
+	SLAP,
+	SPRAY,
+}
+
 var rng: RandomNumberGenerator
 
 func get_random_tile_color() -> TileColor:
