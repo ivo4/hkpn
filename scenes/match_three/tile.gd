@@ -3,12 +3,17 @@ extends Area2D
 class_name Tile
 
 signal drag_started
+signal movement_ended
 
 var index: Vector2
 var color: Enums.TileColor = Enums.get_random_tile_color()
 
 var is_dragging = false
 var drag_start_pos: Vector2
+
+var is_moving = false
+var moving_to: Vector2
+const move_speed = 400
 
 func _ready():
 	connect("input_event", Callable(self, "_on_input_event"))
@@ -27,3 +32,12 @@ func on_drag_end():
 
 func str():
 	return "Tile(" + str(index) + ")"
+
+func _process(delta: float):
+	if is_moving:
+		position = position.move_toward(moving_to, move_speed * delta)
+
+		if position == moving_to:
+			is_moving = false
+			emit_signal("movement_ended", self)
+			z_index = 0

@@ -11,9 +11,7 @@ const tile_size_with_gap: int = tile_size + gap
 var tiles = []
 var dragged_tile: Tile
 var neighbour_tile: Tile
-var resetting_tiles = []
-
-const tile_reset_speed = 400
+var animation_count: int = 0
 
 func _ready():
 	tiles.resize(columns)
@@ -27,6 +25,7 @@ func _ready():
 			tile.index = Vector2(x, y)
 			reset_position(tile)
 			tile.connect("drag_started", Callable(self, "_on_tile_drag_started"))
+			tile.connect("movement_ended", Callable(self, "_on_tile_movement_ended"))
 			add_child(tile)
 			tiles[x][y] = tile
 
@@ -37,9 +36,12 @@ func _ready():
 		print("Match: " + ", ".join(tileMatch.map(func(tile): return str(tile.index))))
 
 func _on_tile_drag_started(tile: Tile):
-	if resetting_tiles.is_empty():
+	if !animation_count:
 		dragged_tile = tile
 		set_process_input(true)
+
+func _on_tile_movement_ended(_tile: Tile):
+	animation_count -= 1
 
 func _input(event):
 	if dragged_tile:
@@ -94,7 +96,15 @@ func on_drag_end(mouse_pos: Vector2):
 	if (get_drag_neighbour(diff) && diff.length() > tile_size_with_gap * 0.5):
 		swap_tiles()
 
-	resetting_tiles = [dragged_tile, neighbour_tile]
+	dragged_tile.moving_to = get_default_pos(dragged_tile.index)
+	dragged_tile.is_moving = true
+	animation_count += 1
+
+	if neighbour_tile:
+		neighbour_tile.moving_to = get_default_pos(neighbour_tile.index)
+		neighbour_tile.is_moving = true
+		animation_count += 1
+
 	dragged_tile.on_drag_end()
 	dragged_tile = null
 	neighbour_tile = null
@@ -116,24 +126,6 @@ func reset_position(tile: Tile):
 
 func is_valid_index(index: Vector2) -> bool:
 	return index.x >= 0 and index.x < columns and index.y >= 0 and index.y < rows
-
-func _process(delta: float):
-	animate_tile_reset(delta)
-
-func animate_tile_reset(delta: float):
-	if !resetting_tiles.is_empty():
-		for tile in resetting_tiles:
-			if !tile:
-				resetting_tiles.erase(tile)
-				continue
-
-			var target = get_default_pos(tile.index)
-			tile.position = tile.position.move_toward(target, tile_reset_speed * delta)
-
-			if tile.position.distance_to(target) < 1:
-				resetting_tiles.erase(tile)
-				reset_position(tile)
-				tile.z_index = 0
 
 func find_matches():
 	var matches = []
