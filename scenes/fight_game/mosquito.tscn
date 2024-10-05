@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bewdaaqts4yb4"]
+[gd_scene load_steps=4 format=3 uid="uid://bewdaaqts4yb4"]
 
 [ext_resource type="Script" path="res://scenes/fight_game/mosquito.gd" id="1_gxv7r"]
+[ext_resource type="Texture2D" uid="uid://bp3p41y032h1j" path="res://assets/characters/characters.png" id="2_johp6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lhh58"]
 
@@ -8,12 +9,10 @@
 motion_mode = 1
 script = ExtResource("1_gxv7r")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-color = Color(0.959808, 0.209147, 0, 1)
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_lhh58")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 5
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_johp6")

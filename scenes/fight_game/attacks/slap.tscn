@@ -13,7 +13,6 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	await get_tree().physics_frame
 	var mosquitos: Array[Node2D] = $AttackArea.get_overlapping_bodies()
-	print_debug(mosquitos)
 	for mosquito in mosquitos:
 		mosquito.queue_free()
 	set_physics_process(false)

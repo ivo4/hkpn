@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://1w71n7uatf7b"]
+[gd_scene load_steps=7 format=3 uid="uid://1w71n7uatf7b"]
 
 [ext_resource type="Script" path="res://scenes/fight_game/fight_game.gd" id="1_sfgrc"]
 
@@ -35,6 +35,10 @@ func _on_body_entered(body: Node2D) -> void:
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k5sve"]
 size = Vector2(512, 20)
 
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_kotbo"]
+a = Vector2(420, 0)
+b = Vector2(0, 0)
+
 [node name="FightGame" type="Node2D"]
 script = ExtResource("1_sfgrc")
 
@@ -54,6 +58,7 @@ offset_bottom = 20.0
 
 [node name="MosquitoSpawnTimer" type="Timer" parent="."]
 process_callback = 0
+wait_time = 0.5
 autostart = true
 
 [node name="MosquitoSpawnArea" type="Area2D" parent="."]
@@ -88,6 +93,12 @@ offset_top = -18.0
 offset_right = 276.0
 offset_bottom = 2.0
 color = Color(0.266667, 1, 1, 0.521569)
+
+[node name="TargetArea" type="Area2D" parent="."]
+position = Vector2(49, 512)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TargetArea"]
+shape = SubResource("SegmentShape2D_kotbo")
 
 [connection signal="timeout" from="MosquitoSpawnTimer" to="." method="_on_mosquito_spawn_timer_timeout"]
 [connection signal="body_entered" from="EndArea" to="." method="_on_end_area_body_entered"]

@@ -15,4 +15,3 @@ func _process(_delta: float) -> void:
 
 func _on_fight_game_damage(amount: float) -> void:
 	annoyance_meter.deal_damage(amount)
-	pass # Replace with function body.
