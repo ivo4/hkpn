@@ -8,6 +8,7 @@ extends Node2D
 
 @onready var spray_powerup: Node2D = $SprayPowerupButton
 @onready var zapper_powerup: Node2D = $ZapperPowerupButton
+@onready var cream_powerup: Node2D = $SoothingCreamPowerupButton
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -28,7 +29,13 @@ func _on_spray_powerup_button_powerup_activated() -> void:
 
 
 func _on_zapper_powerup_button_powerup_activated() -> void:
-	pass # Replace with function body.
+	fight_game.recharge_zapper()
+	zapper_powerup.reset_value()
+
+
+func _on_soothing_cream_powerup_button_powerup_activated() -> void:
+	annoyance_meter.recover_damage(20)
+	cream_powerup.reset_value()
 
 
 func _on_fight_game_weapon_activated(weapon: Enums.WEAPON) -> void:
@@ -38,5 +45,9 @@ func _on_fight_game_weapon_activated(weapon: Enums.WEAPON) -> void:
 
 
 func _on_match_three_matched(count: int, color: Enums.TileColor) -> void:
-	if color == Enums.TileColor.BLUE:
+	if color == Enums.TileColor.GREEN:
 		spray_powerup.increase_value(count)
+	elif color == Enums.TileColor.BLUE:
+		zapper_powerup.increase_value(count)
+	elif color == Enums.TileColor.YELLOW:
+		cream_powerup.increase_value(count)

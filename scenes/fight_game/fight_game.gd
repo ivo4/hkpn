@@ -3,17 +3,14 @@ extends Node2D
 signal damage(amount: float)
 signal weapon_activated(weapon: Enums.WEAPON)
 
-#enum WEAPON {
-	#SLAP,
-	#SPRAY,
-#}
+
+@onready var zapper: Area2D = $ZapperArea
 
 var mosquito_scene: PackedScene = preload("res://scenes/fight_game/mosquito.tscn")
 var slap_attack: PackedScene = preload("res://scenes/fight_game/attacks/slap.tscn")
 var spray_attack: PackedScene = preload("res://scenes/fight_game/attacks/spray.tscn")
 
 var current_weapon: Enums.WEAPON = Enums.WEAPON.SLAP
-#var current_weapon: WEAPON = WEAPON.SPRAY
 var current_attack
 
 # Called when the node enters the scene tree for the first time.
@@ -74,3 +71,7 @@ func _on_end_area_body_entered(body: Node2D) -> void:
 func change_weapon_to_spray() -> void:
 	print_debug("weapon changed to spray")
 	current_weapon = Enums.WEAPON.SPRAY
+
+
+func recharge_zapper() -> void:
+	zapper.recharge()

@@ -12,11 +12,8 @@ size = Vector2(512, 49)
 resource_name = "ZapperArea"
 script/source = "extends Area2D
 
+var zapper_max_charge: int = 10
 var zapper_charge: int = 10
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -29,7 +26,11 @@ func _on_body_entered(body: Node2D) -> void:
 	if (zapper_charge <= 0):
 		return
 	body.queue_free()
-	zapper_charge -= 10
+	zapper_charge -= 1
+
+
+func recharge() -> void:
+	zapper_charge = zapper_max_charge
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k5sve"]
