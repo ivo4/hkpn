@@ -5,7 +5,7 @@ const SPEED = 150.0
 
 var target: Node2D
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	'''
 	# Add the gravity.
 	if not is_on_floor():
