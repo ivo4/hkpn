@@ -1,0 +1,74 @@
+[gd_scene load_steps=5 format=3 uid="uid://c0ohvlrwpmo0i"]
+
+[sub_resource type="GDScript" id="GDScript_6hmtw"]
+script/source = "extends RigidBody2D
+
+signal attack_ended
+
+const SPEED = 30.0
+
+
+func _ready() -> void:
+	pass
+
+
+func _physics_process(_delta: float) -> void:
+	#await get_tree().physics_frame
+	var mosquitos: Array[Node2D] = $AttackArea.get_overlapping_bodies()
+	for mosquito in mosquitos:
+		mosquito.queue_free()
+	#set_physics_process(false)
+
+	var direction: Vector2 = position.direction_to(get_global_mouse_position())
+	velocity = direction * SPEED
+	move_and_slide()
+
+
+func _attack_ended() -> void:
+	attack_ended.emit()
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_20nbm"]
+radius = 181.706
+
+[sub_resource type="Animation" id="Animation_3vp84"]
+resource_name = "attack"
+length = 3.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_attack_ended"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5o6gm"]
+_data = {
+"attack": SubResource("Animation_3vp84")
+}
+
+[node name="Spray" type="RigidBody2D"]
+script = SubResource("GDScript_6hmtw")
+
+[node name="AttackArea" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_20nbm")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+color = Color(0.0324, 0.36, 0.31086, 0.54902)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_5o6gm")
+}
+autoplay = "attack"
