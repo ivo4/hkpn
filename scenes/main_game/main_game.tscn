@@ -40,19 +40,19 @@ position = Vector2(612, 544)
 
 [node name="SprayPowerupButton" parent="." instance=ExtResource("5_fn8f8")]
 position = Vector2(79, 540)
-max_value = 2
+max_value = 6
 current_value = 0
 button_texture = ExtResource("6_oiasi")
 
 [node name="ZapperPowerupButton" parent="." instance=ExtResource("5_fn8f8")]
 position = Vector2(176, 539)
-max_value = 2
+max_value = 6
 current_value = 0
 button_texture = ExtResource("5_nh88p")
 
 [node name="SoothingCreamPowerupButton" parent="." instance=ExtResource("5_fn8f8")]
 position = Vector2(275, 538)
-max_value = 2
+max_value = 6
 current_value = 0
 button_texture = ExtResource("8_ay7me")
 
