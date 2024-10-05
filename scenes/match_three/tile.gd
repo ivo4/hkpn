@@ -21,5 +21,5 @@ func _on_input_event(_viewport: Viewport, event: InputEvent, _shape_idx: int):
 				emit_signal("drag_started", self)
 				z_index = 1
 
-func onDragEnd():
+func on_drag_end():
 	is_dragging = false
