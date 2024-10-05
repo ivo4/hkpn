@@ -4,20 +4,15 @@ signal damage(amount: float)
 
 enum WEAPON {
 	SLAP,
-	GAS,
-}
-
-enum WEAPON_STATE {
-	INACTIVE,
-	ARMED,
-	ACTIVE
+	SPRAY,
 }
 
 var mosquito_scene: PackedScene = preload("res://scenes/fight_game/mosquito.tscn")
 var slap_attack: PackedScene = preload("res://scenes/fight_game/attacks/slap.tscn")
+var spray_attack: PackedScene = preload("res://scenes/fight_game/attacks/spray.tscn")
 
-var current_weapon: WEAPON = WEAPON.SLAP
-var weapon_state: WEAPON_STATE = WEAPON_STATE.INACTIVE
+#var current_weapon: WEAPON = WEAPON.SLAP
+var current_weapon: WEAPON = WEAPON.SPRAY
 var current_attack
 
 # Called when the node enters the scene tree for the first time.
@@ -34,10 +29,14 @@ func _input(event: InputEvent) -> void:
 			return
 		if (current_weapon == WEAPON.SLAP):
 			current_attack = slap_attack.instantiate()
-			#current_attack.position = event.position
 			current_attack.position = get_global_mouse_position() - position
 			current_attack.attack_ended.connect(_attack_ended)
 			damage.emit(1)
+			add_child(current_attack)
+		if (current_weapon == WEAPON.SPRAY):
+			current_attack = spray_attack.instantiate()
+			current_attack.position = get_global_mouse_position() - position
+			current_attack.attack_ended.connect(_attack_ended)
 			add_child(current_attack)
 
 
@@ -57,7 +56,7 @@ func _spawn_mosquito(spawn_pos_x: float, target_pos: Vector2):
 func _on_mosquito_spawn_timer_timeout() -> void:
 	var spawn_area: Rect2 = $MosquitoSpawnArea/CollisionShape2D.shape.get_rect()
 	var spawn_pos_x: float = randf_range(0, spawn_area.size.x)
-	var target_area: CollisionShape2D = $TargetArea/CollisionShape2D
+	#var target_area: CollisionShape2D = $TargetArea/CollisionShape2D
 	var target_area_rect: Rect2 = $TargetArea/CollisionShape2D.shape.get_rect()
 	var target_pos: Vector2 = Vector2(randf_range(0, target_area_rect.size.x), $TargetArea.position.y)
 	_spawn_mosquito(spawn_pos_x, target_pos)

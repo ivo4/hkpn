@@ -1,0 +1,97 @@
+[gd_scene load_steps=10 format=3 uid="uid://c0ohvlrwpmo0i"]
+
+[sub_resource type="GDScript" id="GDScript_6hmtw"]
+script/source = "extends CharacterBody2D
+
+signal attack_ended
+
+const SPEED = 90.0
+
+
+func _ready() -> void:
+	pass
+
+
+func _physics_process(_delta: float) -> void:
+	#await get_tree().physics_frame
+	var mosquitos: Array[Node2D] = $AttackArea.get_overlapping_bodies()
+	for mosquito in mosquitos:
+		mosquito.queue_free()
+
+	var direction: Vector2 = position.direction_to(get_global_mouse_position())
+	velocity = direction * SPEED
+	move_and_slide()
+
+
+func _attack_ended() -> void:
+	attack_ended.emit()
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_20nbm"]
+radius = 127.318
+
+[sub_resource type="Animation" id="Animation_3vp84"]
+resource_name = "attack"
+length = 3.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_attack_ended"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5o6gm"]
+_data = {
+"attack": SubResource("Animation_3vp84")
+}
+
+[sub_resource type="Gradient" id="Gradient_v8fbf"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_uj5hc"]
+gradient = SubResource("Gradient_v8fbf")
+width = 288
+height = 288
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="Gradient" id="Gradient_21gwx"]
+colors = PackedColorArray(0.0324, 0.36, 0.31086, 1, 0.276406, 0.392117, 0.351731, 0.792157)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7afqq"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7w61i"]
+width = 288
+height = 288
+color_ramp = SubResource("Gradient_21gwx")
+noise = SubResource("FastNoiseLite_7afqq")
+
+[node name="Spray" type="CharacterBody2D"]
+script = SubResource("GDScript_6hmtw")
+
+[node name="AttackArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+shape = SubResource("CircleShape2D_20nbm")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_5o6gm")
+}
+autoplay = "attack"
+
+[node name="CircleMask" type="Sprite2D" parent="."]
+clip_children = 1
+texture = SubResource("GradientTexture2D_uj5hc")
+
+[node name="SprayCloud" type="Sprite2D" parent="CircleMask"]
+texture = SubResource("NoiseTexture2D_7w61i")
