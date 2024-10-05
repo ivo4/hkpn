@@ -14,6 +14,10 @@ config/name="HKPN"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Enums="*res://scenes/enums.gd"
+
 [input]
 
 Attack={
