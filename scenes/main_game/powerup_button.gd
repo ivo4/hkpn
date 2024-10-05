@@ -38,3 +38,7 @@ func _on_texture_button_pressed() -> void:
 
 func reset_value() -> void:
 	current_value = 0
+
+
+func increase_value(value: int) -> void:
+	current_value += value

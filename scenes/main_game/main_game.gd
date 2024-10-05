@@ -35,3 +35,8 @@ func _on_fight_game_weapon_activated(weapon: Enums.WEAPON) -> void:
 	print_debug("weapon activated, ", weapon)
 	if (weapon == Enums.WEAPON.SPRAY):
 		spray_powerup.reset_value()
+
+
+func _on_match_three_matched(count: int, color: Enums.TileColor) -> void:
+	if color == Enums.TileColor.BLUE:
+		spray_powerup.increase_value(count)
