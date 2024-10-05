@@ -24,3 +24,6 @@ func _on_input_event(_viewport: Viewport, event: InputEvent, _shape_idx: int):
 
 func on_drag_end():
 	is_dragging = false
+
+func str():
+	return "Tile(" + str(index) + ")"

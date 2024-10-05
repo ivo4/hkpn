@@ -30,6 +30,12 @@ func _ready():
 			add_child(tile)
 			tiles[x][y] = tile
 
+	var matches = find_matches()
+
+	# TODO remove
+	for tileMatch in matches:
+		print("Match: " + ", ".join(tileMatch.map(func(tile): return str(tile.index))))
+
 func _on_tile_drag_started(tile: Tile):
 	if resetting_tiles.is_empty():
 		dragged_tile = tile
@@ -128,3 +134,84 @@ func animate_tile_reset(delta: float):
 				resetting_tiles.erase(tile)
 				reset_position(tile)
 				tile.z_index = 0
+
+func find_matches():
+	var matches = []
+
+	for x in range(columns):
+		var color = tiles[x][0].color
+		var start = 0
+		var length = 1
+
+		for y in range(1, rows):
+			var tile = tiles[x][y]
+
+			if tile.color == color:
+				length += 1
+
+			if tile.color != color || y == rows - 1:
+				if length >= 3:
+					var tileMatch = create_vertical_match(x, start, length)
+					add_to_matches(matches, tileMatch)
+
+				color = tile.color
+				start = y
+				length = 1
+
+	for y in range(rows):
+		var color = tiles[0][y].color
+		var start = 0
+		var length = 1
+
+		for x in range(1, columns):
+			var tile = tiles[x][y]
+
+			if tile.color == color:
+				length += 1
+
+			if tile.color != color || x == columns - 1:
+				if length >= 3:
+					var tileMatch = create_horizontal_match(start, y, length)
+					add_to_matches(matches, tileMatch)
+
+				color = tile.color
+				start = x
+				length = 1
+
+	return matches
+
+func create_vertical_match(x: int, y: int, length: int):
+	var match_tiles = []
+
+	for i in range(length):
+		match_tiles.append(tiles[x][y + i])
+
+	return match_tiles
+
+func create_horizontal_match(x: int, y: int, length: int):
+	var match_tiles = []
+
+	for i in range(length):
+		match_tiles.append(tiles[x + i][y])
+
+	return match_tiles
+
+func add_to_matches(matches: Array, newMatch: Array):
+	for existingMatch in matches:
+		if matches_overlap(existingMatch, newMatch):
+			merge_matches(existingMatch, newMatch)
+			return
+
+	matches.append(newMatch)
+
+func matches_overlap(match1: Array, match2: Array) -> bool:
+	for tile in match1:
+		if match2.has(tile):
+			return true
+
+	return false
+
+func merge_matches(existingMatch: Array, newMatch: Array):
+	for tile in newMatch:
+		if !existingMatch.has(tile):
+			existingMatch.append(tile)
