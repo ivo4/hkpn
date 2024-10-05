@@ -2,7 +2,8 @@ extends Area2D
 
 @export var tile_scene: PackedScene
 
-signal matched
+signal matched(count: int, color: Enums.TileColor)
+signal icon_collected(icon: Enums.TileIcon)
 
 const rows: int = 7
 const columns: int = 7
@@ -25,7 +26,7 @@ func _ready():
 		for y in range(rows):
 			add_tile(x, y)
 
-	check_for_matches()
+	self.call_deferred("check_for_matches")
 
 func add_tile(x: int, y: int):
 	var tile: Tile = tile_scene.instantiate()
@@ -156,6 +157,9 @@ func check_for_matches():
 		for tile in tileMatch:
 			tile.is_disappearing = true
 			animation_count += 1
+
+			if tile.icon != Enums.TileIcon.NONE:
+				emit_signal("icon_collected", tile.icon)
 
 	# TODO if no matches, check whether any matches are possible to make.
 	# If not, shuffle the board? Or game over.

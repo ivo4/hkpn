@@ -1,12 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://b15db2i8qrcjd"]
+[gd_scene load_steps=4 format=3 uid="uid://b15db2i8qrcjd"]
 
+[ext_resource type="Script" path="res://scenes/match_three/match_three.gd" id="1_rvpdl"]
 [ext_resource type="Script" path="res://scenes/match_three/grid.gd" id="1_u838c"]
 [ext_resource type="PackedScene" uid="uid://b74yhi7ygxkpo" path="res://scenes/match_three/tile.tscn" id="2_eikr5"]
 
 [node name="MatchThree" type="Node2D"]
+script = ExtResource("1_rvpdl")
 metadata/_edit_group_ = true
 
 [node name="Grid" type="Area2D" parent="."]
 position = Vector2(50, 50)
 script = ExtResource("1_u838c")
 tile_scene = ExtResource("2_eikr5")
+
+[connection signal="matched" from="Grid" to="." method="_on_grid_matched"]

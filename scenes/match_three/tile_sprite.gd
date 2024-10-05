@@ -3,8 +3,9 @@ extends Sprite2D
 @export var texture_red: Texture
 @export var texture_green: Texture
 @export var texture_blue: Texture
+@export var texture_yellow: Texture
 @export var texture_brown: Texture
-@export var texture_gray: Texture
+@export var texture_purple: Texture
 
 const TileColor = Enums.TileColor
 
@@ -18,10 +19,12 @@ func _ready():
 			texture = texture_green
 		TileColor.BLUE:
 			texture = texture_blue
+		TileColor.YELLOW:
+			texture = texture_yellow
 		TileColor.BROWN:
 			texture = texture_brown
 		_:
-			texture = texture_gray
+			texture = texture_purple
 
 func _process(_delta):
 	pass

@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://fthb7bhebrxs"]
+[gd_scene load_steps=9 format=3 uid="uid://fthb7bhebrxs"]
 
 [ext_resource type="Script" path="res://scenes/main_game/main_game.gd" id="1_q5wl0"]
 [ext_resource type="PackedScene" uid="uid://b15db2i8qrcjd" path="res://scenes/match_three/match_three.tscn" id="2_2yqlu"]
 [ext_resource type="PackedScene" uid="uid://1w71n7uatf7b" path="res://scenes/fight_game/fight_game.tscn" id="3_ygm8n"]
 [ext_resource type="PackedScene" uid="uid://c7lk6ud4k38j0" path="res://scenes/main_game/annoyance_meter.tscn" id="4_yric5"]
+[ext_resource type="PackedScene" uid="uid://lfv6cpmbq331" path="res://scenes/main_game/powerup_button.tscn" id="5_fn8f8"]
+[ext_resource type="Texture2D" uid="uid://cgknopfvvyv25" path="res://assets/sprites/tile-blue.png" id="5_nh88p"]
+[ext_resource type="Texture2D" uid="uid://dwjytrkstyb2u" path="res://assets/sprites/tile-green.png" id="6_oiasi"]
+[ext_resource type="Texture2D" uid="uid://ctmdm2sx5pn6u" path="res://assets/sprites/tile-yellow.png" id="8_ay7me"]
 
 [node name="MainGame" type="Node2D"]
 script = ExtResource("1_q5wl0")
@@ -14,6 +18,7 @@ offset_bottom = 40.0
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
+physics_object_picking = true
 render_target_update_mode = 4
 
 [node name="MatchThree" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_2yqlu")]
@@ -33,4 +38,27 @@ render_target_update_mode = 4
 [node name="AnnoyanceMeter" parent="." instance=ExtResource("4_yric5")]
 position = Vector2(612, 544)
 
+[node name="SprayPowerupButton" parent="." instance=ExtResource("5_fn8f8")]
+position = Vector2(79, 540)
+max_value = 2
+current_value = 0
+button_texture = ExtResource("6_oiasi")
+
+[node name="ZapperPowerupButton" parent="." instance=ExtResource("5_fn8f8")]
+position = Vector2(176, 539)
+max_value = 2
+current_value = 0
+button_texture = ExtResource("5_nh88p")
+
+[node name="SoothingCreamPowerupButton" parent="." instance=ExtResource("5_fn8f8")]
+position = Vector2(275, 538)
+max_value = 2
+current_value = 0
+button_texture = ExtResource("8_ay7me")
+
+[connection signal="matched" from="SubViewportContainer/SubViewport/MatchThree" to="." method="_on_match_three_matched"]
 [connection signal="damage" from="SubViewportContainer2/SubViewport/FightGame" to="." method="_on_fight_game_damage"]
+[connection signal="weapon_activated" from="SubViewportContainer2/SubViewport/FightGame" to="." method="_on_fight_game_weapon_activated"]
+[connection signal="powerup_activated" from="SprayPowerupButton" to="." method="_on_spray_powerup_button_powerup_activated"]
+[connection signal="powerup_activated" from="ZapperPowerupButton" to="." method="_on_zapper_powerup_button_powerup_activated"]
+[connection signal="powerup_activated" from="SoothingCreamPowerupButton" to="." method="_on_soothing_cream_powerup_button_powerup_activated"]
