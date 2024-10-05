@@ -4,6 +4,8 @@ enum TileColor {
 	RED,
 	GREEN,
 	BLUE,
+	BROWN,
+	GRAY,
 }
 
 func get_random_tile_color() -> TileColor:

@@ -5,6 +5,7 @@ class_name Tile
 signal drag_started
 
 var index: Vector2
+var color: Enums.TileColor = Enums.get_random_tile_color()
 
 var is_dragging = false
 var drag_start_pos: Vector2
