@@ -1,14 +1,15 @@
-[gd_scene load_steps=10 format=3 uid="uid://fthb7bhebrxs"]
+[gd_scene load_steps=11 format=3 uid="uid://fthb7bhebrxs"]
 
 [ext_resource type="Script" path="res://scenes/main_game/main_game.gd" id="1_q5wl0"]
 [ext_resource type="PackedScene" uid="uid://b15db2i8qrcjd" path="res://scenes/match_three/match_three.tscn" id="2_2yqlu"]
 [ext_resource type="PackedScene" uid="uid://1w71n7uatf7b" path="res://scenes/fight_game/fight_game.tscn" id="3_ygm8n"]
 [ext_resource type="PackedScene" uid="uid://c7lk6ud4k38j0" path="res://scenes/main_game/annoyance_meter.tscn" id="4_yric5"]
-[ext_resource type="PackedScene" path="res://scenes/main_game/powerup_button.tscn" id="5_fn8f8"]
+[ext_resource type="PackedScene" uid="uid://lfv6cpmbq331" path="res://scenes/main_game/powerup_button.tscn" id="5_fn8f8"]
 [ext_resource type="Texture2D" uid="uid://bwaof5r2yjelm" path="res://assets/sprites/icon-bugspray.png" id="6_adfyx"]
 [ext_resource type="Texture2D" uid="uid://dci36xbj1ir4r" path="res://assets/sprites/icon-zapper.png" id="7_8cfbx"]
 [ext_resource type="Texture2D" uid="uid://ctmdm2sx5pn6u" path="res://assets/sprites/tile-yellow.png" id="8_ay7me"]
 [ext_resource type="Texture2D" uid="uid://c78rd37qqevru" path="res://assets/sprites/icon-fire.png" id="8_rmfes"]
+[ext_resource type="AudioStream" uid="uid://cuj4rpyksrlh0" path="res://assets/audio/music/kidratrack.wav" id="9_7ygxm"]
 
 [node name="MainGame" type="Node2D"]
 script = ExtResource("1_q5wl0")
@@ -66,6 +67,11 @@ scale = Vector2(0.038, 0.038)
 max_value = 12
 current_value = 12
 button_texture = ExtResource("8_rmfes")
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_7ygxm")
+autoplay = true
+bus = &"Music"
 
 [connection signal="matched" from="SubViewportContainer/SubViewport/MatchThree" to="." method="_on_match_three_matched"]
 [connection signal="damage" from="SubViewportContainer2/SubViewport/FightGame" to="." method="_on_fight_game_damage"]
