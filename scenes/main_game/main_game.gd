@@ -32,22 +32,31 @@ func _on_zapper_powerup_button_powerup_activated() -> void:
 	fight_game.recharge_zapper()
 	zapper_powerup.reset_value()
 
-
 func _on_soothing_cream_powerup_button_powerup_activated() -> void:
 	annoyance_meter.recover_damage(20)
 	cream_powerup.reset_value()
-
 
 func _on_fight_game_weapon_activated(weapon: Enums.WEAPON) -> void:
 	print_debug("weapon activated, ", weapon)
 	if (weapon == Enums.WEAPON.SPRAY):
 		spray_powerup.reset_value()
 
-
 func _on_match_three_matched(count: int, color: Enums.TileColor) -> void:
-	if color == Enums.TileColor.GREEN:
+	# TODO remove
+	if color == Enums.TileColor.YELLOW:
 		spray_powerup.increase_value(count)
-	elif color == Enums.TileColor.BLUE:
+	elif color == Enums.TileColor.LIGHTBLUE:
 		zapper_powerup.increase_value(count)
-	elif color == Enums.TileColor.YELLOW:
+	elif color == Enums.TileColor.RED:
 		cream_powerup.increase_value(count)
+
+	if count > 3:
+		# TODO refill flamethrower
+		pass
+
+# TODO connect in scene
+func _on_match_three_icon_collected(icon: Enums.TileIcon) -> void:
+	if icon == Enums.TileIcon.SPRAY:
+		spray_powerup.increase_value(1)
+	elif icon == Enums.TileIcon.ZAPPER:
+		zapper_powerup.increase_value(1)

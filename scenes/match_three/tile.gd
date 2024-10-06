@@ -20,12 +20,20 @@ const move_speed = 600
 var is_disappearing = false
 const disappear_speed = 2.4
 
+const textureBugsprayIcon = preload("res://assets/sprites/icon-bugspray.png")
+const iconScaleBugspray = 0.07
+
+const textureZapperIcon = preload("res://assets/sprites/icon-zapper.png")
+const iconScaleZapper = 0.105
+
 func _ready():
 	match icon:
 		Enums.TileIcon.SPRAY:
-			$Icon.texture = load("res://assets/sprites/bugspray-icon.png")
+			$Icon.texture = textureBugsprayIcon
+			$Icon.scale = Vector2(iconScaleBugspray, iconScaleBugspray)
 		Enums.TileIcon.ZAPPER:
-			$Icon.texture = load("res://assets/sprites/zapper-icon.png")
+			$Icon.texture = textureZapperIcon
+			$Icon.scale = Vector2(iconScaleZapper, iconScaleZapper)
 		_:
 			$Icon.queue_free()
 
