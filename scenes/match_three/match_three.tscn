@@ -13,4 +13,7 @@ position = Vector2(50, 50)
 script = ExtResource("1_u838c")
 tile_scene = ExtResource("2_eikr5")
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Grid"]
+bus = &"SFX"
+
 [connection signal="matched" from="Grid" to="." method="_on_grid_matched"]
