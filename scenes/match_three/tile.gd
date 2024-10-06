@@ -26,6 +26,9 @@ const iconScaleBugspray = 0.07
 const textureZapperIcon = preload("res://assets/sprites/icon-zapper.png")
 const iconScaleZapper = 0.105
 
+const textureCreamIcon = preload("res://assets/sprites/icon-cream.png")
+const iconScaleCream = 0.06
+
 func _ready():
 	match icon:
 		Enums.TileIcon.SPRAY:
@@ -34,6 +37,9 @@ func _ready():
 		Enums.TileIcon.ZAPPER:
 			$Icon.texture = textureZapperIcon
 			$Icon.scale = Vector2(iconScaleZapper, iconScaleZapper)
+		Enums.TileIcon.CREAM:
+			$Icon.texture = textureCreamIcon
+			$Icon.scale = Vector2(iconScaleCream, iconScaleCream)
 		_:
 			$Icon.queue_free()
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://60upqoj4qxx5"]
+[gd_scene load_steps=19 format=3 uid="uid://60upqoj4qxx5"]
 
 [ext_resource type="Script" path="res://scenes/menus/main_menu.gd" id="1_2sra7"]
 [ext_resource type="Texture2D" uid="uid://ubetet6hpump" path="res://assets/ui/start_backround.png" id="1_i4b48"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://h13fu8acbaht" path="res://assets/ui/volumeslider.png" id="9_pvdeg"]
 [ext_resource type="Texture2D" uid="uid://xu1yy2hqin86" path="res://assets/ui/CREDITS.png" id="11_l46s5"]
 [ext_resource type="Texture2D" uid="uid://hw85jogullr7" path="res://assets/ui/back_button.png" id="12_f0n8o"]
+[ext_resource type="FontFile" uid="uid://ddispl7k8lir0" path="res://assets/font/BADABB__.TTF" id="13_mepes"]
 
 [sub_resource type="ImageTexture" id="ImageTexture_i3nwt"]
 
@@ -35,9 +36,12 @@ texture_margin_top = 40.0
 texture_margin_right = 47.0
 texture_margin_bottom = 42.0
 
-[sub_resource type="LabelSettings" id="LabelSettings_7thlj"]
-font_size = 26
-font_color = Color(0, 0.00392157, 0.0235294, 1)
+[sub_resource type="LabelSettings" id="LabelSettings_2mbup"]
+font = ExtResource("13_mepes")
+font_size = 40
+font_color = Color(0.8, 0, 0, 1)
+shadow_size = 9
+shadow_color = Color(0, 0, 0, 1)
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -218,18 +222,20 @@ texture_normal = ExtResource("12_f0n8o")
 
 [node name="Label" type="Label" parent="Tutorial"]
 layout_mode = 0
-offset_left = 99.0
-offset_top = 124.0
-offset_right = 1061.0
-offset_bottom = 433.0
-text = "Kill mosquitoes by clicking on them OR swap adjacent tiles to make matches
+offset_left = 109.0
+offset_top = 49.0
+offset_right = 1071.0
+offset_bottom = 473.0
+text = "Kill mosquitoes by clicking on them OR swap adjacent tiles
+to make matches
 
 Matches with icons charge power-ups:
 - The bug spray makes your clicks more DEADLY 💀
 - The bug zapper attracts and kills mosquitoes ⚡
+- The cream reduces irritation 🌿
 
 Matches of 4 or more tiles charge THE FLAMETHROWER! 🔥"
-label_settings = SubResource("LabelSettings_7thlj")
+label_settings = SubResource("LabelSettings_2mbup")
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="TutorialButton" to="." method="_on_tutorial_button_pressed"]

@@ -1,10 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://dvsetvcw2tqcj"]
+[gd_scene load_steps=7 format=3 uid="uid://dvsetvcw2tqcj"]
 
 [ext_resource type="Texture2D" uid="uid://ubetet6hpump" path="res://assets/ui/start_backround.png" id="1_peiit"]
+[ext_resource type="Script" path="res://scenes/menus/game_over.gd" id="1_pvvph"]
 [ext_resource type="AudioStream" uid="uid://m8dsxlljtaaa" path="res://assets/audio/music/kaotuse_track.wav" id="2_hffao"]
+[ext_resource type="FontFile" uid="uid://ddispl7k8lir0" path="res://assets/font/BADABB__.TTF" id="4_jmb63"]
+[ext_resource type="Texture2D" uid="uid://hw85jogullr7" path="res://assets/ui/back_button.png" id="4_pl8jj"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_wkjmf"]
+font = ExtResource("4_jmb63")
 font_size = 44
+font_color = Color(0.8, 0, 0, 1)
+shadow_size = 9
+shadow_color = Color(0, 0, 0, 1)
 
 [node name="GameOver" type="Control"]
 layout_mode = 3
@@ -13,6 +20,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_pvvph")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
@@ -25,20 +33,40 @@ texture = ExtResource("1_peiit")
 stream = ExtResource("2_hffao")
 autoplay = true
 
-[node name="Label" type="Label" parent="."]
+[node name="TextLabel" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -165.5
-offset_top = -24.5
-offset_right = 165.5
-offset_bottom = 24.5
+offset_left = -450.0
+offset_top = -134.0
+offset_right = 459.0
+offset_bottom = -9.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "There is no winning against the mosquitos.
-But you managed to survive for:"
+But you managed to survive for"
 label_settings = SubResource("LabelSettings_wkjmf")
 horizontal_alignment = 1
+
+[node name="TimeLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 477.5
+offset_top = 325.5
+offset_right = 686.5
+offset_bottom = 386.5
+text = "0 seconds"
+label_settings = SubResource("LabelSettings_wkjmf")
+
+[node name="BackButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 62.0
+offset_top = 484.0
+offset_right = 2295.0
+offset_bottom = 1809.0
+scale = Vector2(0.09, 0.09)
+texture_normal = ExtResource("4_pl8jj")
+
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

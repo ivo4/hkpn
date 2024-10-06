@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://1w71n7uatf7b"]
 
 [ext_resource type="Script" path="res://scenes/fight_game/fight_game.gd" id="1_sfgrc"]
-[ext_resource type="Texture2D" uid="uid://fkf07hnu4ev1" path="res://assets/characters/characters_boy1.2.png" id="2_50jvd"]
+[ext_resource type="Texture2D" uid="uid://fkf07hnu4ev1" path="res://assets/characters/boy-1.png" id="2_50jvd"]
 [ext_resource type="Texture2D" uid="uid://dci36xbj1ir4r" path="res://assets/sprites/icon-zapper.png" id="3_a6p3t"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_8t20j"]

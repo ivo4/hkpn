@@ -18,6 +18,7 @@ enum TileIcon {
 	NONE,
 	SPRAY,
 	ZAPPER,
+	CREAM,
 }
 
 var rng: RandomNumberGenerator
@@ -53,7 +54,7 @@ func get_random_tile_icon() -> TileIcon:
 	var icons = TileIcon.values()
 
 	# Most of the time you get NONE
-	var index = rng.randi() % 5
+	var index = rng.randi() % 6
 
 	if index >= icons.size():
 		return TileIcon.NONE
