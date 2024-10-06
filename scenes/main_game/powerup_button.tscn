@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://lfv6cpmbq331"]
+[gd_scene load_steps=4 format=3 uid="uid://d0fvtp25fa8bf"]
 
 [ext_resource type="Script" path="res://scenes/main_game/powerup_button.gd" id="1_d436u"]
 [ext_resource type="Texture2D" uid="uid://c3goc4l0ti4vj" path="res://assets/sprites/tile-red.png" id="2_q8ln7"]
@@ -10,6 +10,11 @@ size = Vector2(444, 444)
 script = ExtResource("1_d436u")
 current_value = 25
 button_texture = ExtResource("2_q8ln7")
+
+[node name="Glow" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_q8ln7")
+centered = false
 
 [node name="GrayBackground" type="Sprite2D" parent="."]
 modulate = Color(0.310617, 0.310617, 0.310617, 1)

@@ -1,17 +1,21 @@
-[gd_scene load_steps=13 format=3 uid="uid://fthb7bhebrxs"]
+[gd_scene load_steps=17 format=3 uid="uid://fthb7bhebrxs"]
 
 [ext_resource type="Script" path="res://scenes/main_game/main_game.gd" id="1_q5wl0"]
 [ext_resource type="PackedScene" uid="uid://b15db2i8qrcjd" path="res://scenes/match_three/match_three.tscn" id="2_2yqlu"]
 [ext_resource type="Texture2D" uid="uid://cm5fyt4do7c2o" path="res://assets/ui/main-background.png" id="2_icvpt"]
 [ext_resource type="PackedScene" uid="uid://1w71n7uatf7b" path="res://scenes/fight_game/fight_game.tscn" id="3_ygm8n"]
 [ext_resource type="PackedScene" uid="uid://c7lk6ud4k38j0" path="res://scenes/main_game/annoyance_meter.tscn" id="4_yric5"]
-[ext_resource type="PackedScene" uid="uid://lfv6cpmbq331" path="res://scenes/main_game/powerup_button.tscn" id="5_fn8f8"]
+[ext_resource type="PackedScene" uid="uid://d0fvtp25fa8bf" path="res://scenes/main_game/powerup_button.tscn" id="5_fn8f8"]
 [ext_resource type="Texture2D" uid="uid://bwaof5r2yjelm" path="res://assets/sprites/icon-bugspray.png" id="6_adfyx"]
 [ext_resource type="Texture2D" uid="uid://dci36xbj1ir4r" path="res://assets/sprites/icon-zapper.png" id="7_8cfbx"]
-[ext_resource type="Texture2D" uid="uid://ctmdm2sx5pn6u" path="res://assets/sprites/tile-yellow.png" id="8_ay7me"]
 [ext_resource type="Texture2D" uid="uid://c78rd37qqevru" path="res://assets/sprites/icon-fire.png" id="8_rmfes"]
+[ext_resource type="Texture2D" uid="uid://bdfatvx6b0jkm" path="res://assets/sprites/glow-bugspray.png" id="9_0sw07"]
 [ext_resource type="AudioStream" uid="uid://cuj4rpyksrlh0" path="res://assets/audio/music/kidratrack.wav" id="9_7ygxm"]
+[ext_resource type="Texture2D" uid="uid://d2qcv456h8uha" path="res://assets/sprites/glow-zapper.png" id="11_gt1xx"]
 [ext_resource type="Texture2D" uid="uid://dgobx5bgmuej2" path="res://assets/ui/frame.png" id="12_edn37"]
+[ext_resource type="Texture2D" uid="uid://jwn7rgthufpa" path="res://assets/sprites/icon-cream.png" id="12_jhq1n"]
+[ext_resource type="Texture2D" uid="uid://dwrxh02xwjvhb" path="res://assets/sprites/glow-cream.png" id="13_0c8k8"]
+[ext_resource type="Texture2D" uid="uid://bfmo8ylx20yk1" path="res://assets/sprites/glow-flame.png" id="15_mdfqi"]
 
 [node name="MainGame" type="Node2D"]
 script = ExtResource("1_q5wl0")
@@ -64,6 +68,9 @@ scale = Vector2(0.087, 0.087)
 max_value = 6
 current_value = 0
 button_texture = ExtResource("6_adfyx")
+glow_texture = ExtResource("9_0sw07")
+glow_offset_x = -100.0
+glow_offset_y = -20.0
 
 [node name="ZapperPowerupButton" parent="." instance=ExtResource("5_fn8f8")]
 position = Vector2(176, 563)
@@ -71,13 +78,21 @@ scale = Vector2(0.128, 0.128)
 max_value = 6
 current_value = 0
 button_texture = ExtResource("7_8cfbx")
+glow_texture = ExtResource("11_gt1xx")
+glow_scale = 0.74
+glow_offset_x = 50.0
+glow_offset_y = -65.0
 
 [node name="SoothingCreamPowerupButton" parent="." instance=ExtResource("5_fn8f8")]
 position = Vector2(275, 562)
-scale = Vector2(0.144, 0.144)
+scale = Vector2(0.079, 0.079)
 max_value = 6
 current_value = 0
-button_texture = ExtResource("8_ay7me")
+button_texture = ExtResource("12_jhq1n")
+glow_texture = ExtResource("13_0c8k8")
+glow_scale = 1.05
+glow_offset_x = 70.0
+glow_offset_y = -100.0
 
 [node name="FlamePowerupButton" parent="." instance=ExtResource("5_fn8f8")]
 position = Vector2(378, 560)
@@ -85,6 +100,10 @@ scale = Vector2(0.038, 0.038)
 max_value = 12
 current_value = 12
 button_texture = ExtResource("8_rmfes")
+glow_texture = ExtResource("15_mdfqi")
+glow_scale = 2.25
+glow_offset_x = 70.0
+glow_offset_y = -200.0
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_7ygxm")

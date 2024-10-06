@@ -14,11 +14,24 @@ signal powerup_activated
 	set(value):
 		button_texture = value
 
+@export var glow_texture: Texture2D:
+	get:
+		return glow_texture
+	set(value):
+		glow_texture = value
+
+@export var glow_scale: float = 1.0
+@export var glow_offset_x: float = 0
+@export var glow_offset_y: float = 0
+
 
 func _ready() -> void:
 	$ButtonProgressMask/TextureButton.disabled = true
 	$ButtonProgressMask/TextureButton.texture_normal = button_texture
 	$GrayBackground.texture = button_texture
+	$Glow.texture = glow_texture
+	$Glow.scale = Vector2(glow_scale, glow_scale)
+	$Glow.position = Vector2(glow_offset_x, glow_offset_y)
 	$ButtonProgressMask.texture = PlaceholderTexture2D.new()
 	$ButtonProgressMask.texture.size.x = button_texture.get_size().x
 	$ButtonProgressMask.texture.size.y = button_texture.get_size().y
@@ -38,7 +51,11 @@ func _on_texture_button_pressed() -> void:
 
 func reset_value() -> void:
 	current_value = 0
+	$Glow.visible = false
 
 
 func increase_value(value: int) -> void:
 	current_value += value
+
+	if (current_value >= max_value):
+		$Glow.visible = true
