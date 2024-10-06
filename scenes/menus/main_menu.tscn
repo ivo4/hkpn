@@ -227,14 +227,15 @@ offset_top = 49.0
 offset_right = 1071.0
 offset_bottom = 473.0
 text = "Kill mosquitoes by clicking on them OR swap adjacent tiles
-to make matches
+to make matches. if you get too irritated, you lose!
 
 Matches with icons charge power-ups:
 - The bug spray makes your clicks more DEADLY 💀
 - The bug zapper attracts and kills mosquitoes ⚡
 - The cream reduces irritation 🌿
 
-Matches of 4 or more tiles charge THE FLAMETHROWER! 🔥"
+Matches of 4 or more tiles charge THE FLAMETHROWER! 🔥
+                                  ...which has a soothing effect of its own..."
 label_settings = SubResource("LabelSettings_2mbup")
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]

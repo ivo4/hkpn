@@ -8,6 +8,7 @@
 script/source = "extends Node2D
 
 signal attack_ended
+signal mosquito_burned
 
 
 func _ready() -> void:
@@ -24,6 +25,7 @@ func _attack_ended() -> void:
 
 func _on_kill_area_body_entered(body: Node2D) -> void:
 	body.queue_free()
+	mosquito_burned.emit()
 "
 
 [sub_resource type="Gradient" id="Gradient_uw4t0"]

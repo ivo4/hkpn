@@ -2,7 +2,7 @@ extends Node2D
 
 signal damage(amount: float)
 signal weapon_activated(weapon: Enums.WEAPON)
-
+signal mosquito_burned
 
 @onready var zapper: Area2D = $ZapperArea
 
@@ -44,6 +44,7 @@ func _input(event: InputEvent) -> void:
 			current_attack = flame_attack.instantiate()
 			current_attack.position = $Human.position
 			current_attack.attack_ended.connect(_attack_ended)
+			current_attack.mosquito_burned.connect(_mosquito_burned)
 			add_child(current_attack)
 			weapon_activated.emit(Enums.WEAPON.FLAME)
 
@@ -53,6 +54,10 @@ func _attack_ended() -> void:
 	current_attack.queue_free()
 	current_attack = null
 	current_weapon = Enums.WEAPON.SLAP
+
+
+func _mosquito_burned() -> void:
+	mosquito_burned.emit()
 
 
 func _spawn_mosquito(spawn_pos_x: float, target_pos: Vector2):

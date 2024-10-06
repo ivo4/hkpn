@@ -15,7 +15,7 @@ var elapsed_time_ms: float = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	fight_game.connect("mosquito_burned", Callable(self, "_on_mosquito_burned"))
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -74,3 +74,7 @@ func _on_annoyance_meter_annoyance_changed(newValue: float) -> void:
 func _on_annoyance_meter_annoyance_filled() -> void:
 	Global.last_result = elapsed_time_ms
 	get_tree().change_scene_to_file("res://scenes/menus/game_over.tscn")
+
+
+func _on_mosquito_burned() -> void:
+	annoyance_meter.recover_damage(5)
