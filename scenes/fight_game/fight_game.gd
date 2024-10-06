@@ -110,4 +110,3 @@ func _on_zapper_depleted() -> void:
 	for child in get_children():
 		if child is Mosquito:
 			child.set_target(get_human_target_pos())
-

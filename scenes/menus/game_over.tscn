@@ -1,12 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://dvsetvcw2tqcj"]
+[gd_scene load_steps=7 format=3 uid="uid://dvsetvcw2tqcj"]
 
 [ext_resource type="Texture2D" uid="uid://ubetet6hpump" path="res://assets/ui/start_backround.png" id="1_peiit"]
 [ext_resource type="Script" path="res://scenes/menus/game_over.gd" id="1_pvvph"]
 [ext_resource type="AudioStream" uid="uid://m8dsxlljtaaa" path="res://assets/audio/music/kaotuse_track.wav" id="2_hffao"]
+[ext_resource type="FontFile" uid="uid://ddispl7k8lir0" path="res://assets/font/BADABB__.TTF" id="4_jmb63"]
 [ext_resource type="Texture2D" uid="uid://hw85jogullr7" path="res://assets/ui/back_button.png" id="4_pl8jj"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_wkjmf"]
+font = ExtResource("4_jmb63")
 font_size = 44
+font_color = Color(0.8, 0, 0, 1)
+shadow_size = 9
+shadow_color = Color(0, 0, 0, 1)
 
 [node name="GameOver" type="Control"]
 layout_mode = 3
