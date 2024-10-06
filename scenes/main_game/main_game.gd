@@ -11,14 +11,17 @@ extends Node2D
 @onready var cream_powerup: Node2D = $SoothingCreamPowerupButton
 @onready var flame_powerup: Node2D = $FlamePowerupButton
 
+var elapsed_time_ms: float = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	pass
+func _process(delta: float) -> void:
+	elapsed_time_ms += delta
+	$ClockLabel.text = str(elapsed_time_ms)
 
 
 func _on_fight_game_damage(amount: float) -> void:
@@ -64,4 +67,6 @@ func _on_match_three_icon_collected(icon: Enums.TileIcon) -> void:
 
 
 func _on_annoyance_meter_annoyance_filled() -> void:
+	Global.last_result = elapsed_time_ms
 	get_tree().change_scene_to_file("res://scenes/menus/game_over.tscn")
+	
