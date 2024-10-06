@@ -1,4 +1,3 @@
-@tool
 extends Node2D
 
 signal powerup_activated
@@ -20,6 +19,7 @@ func _ready() -> void:
 	$ButtonProgressMask/TextureButton.disabled = true
 	$ButtonProgressMask/TextureButton.texture_normal = button_texture
 	$GrayBackground.texture = button_texture
+	$ButtonProgressMask.texture = PlaceholderTexture2D.new()
 	$ButtonProgressMask.texture.size.x = button_texture.get_size().x
 	$ButtonProgressMask.texture.size.y = button_texture.get_size().y
 

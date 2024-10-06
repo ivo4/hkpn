@@ -9,6 +9,7 @@ signal weapon_activated(weapon: Enums.WEAPON)
 var mosquito_scene: PackedScene = preload("res://scenes/fight_game/mosquito.tscn")
 var slap_attack: PackedScene = preload("res://scenes/fight_game/attacks/slap.tscn")
 var spray_attack: PackedScene = preload("res://scenes/fight_game/attacks/spray.tscn")
+var flame_attack: PackedScene = preload("res://scenes/fight_game/attacks/flame.tscn")
 
 var current_weapon: Enums.WEAPON = Enums.WEAPON.SLAP
 var current_attack
@@ -19,9 +20,6 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	#if not get_viewport_rect().has_point(event.position):
-		#print_debug("not in viewport")
-		#return
 	if (event.is_action_pressed("Attack")):
 		if (current_attack != null):
 			return
@@ -38,9 +36,16 @@ func _input(event: InputEvent) -> void:
 			current_attack.attack_ended.connect(_attack_ended)
 			add_child(current_attack)
 			weapon_activated.emit(Enums.WEAPON.SPRAY)
+		if (current_weapon == Enums.WEAPON.FLAME):
+			current_attack = flame_attack.instantiate()
+			current_attack.position = $Human.position
+			current_attack.attack_ended.connect(_attack_ended)
+			add_child(current_attack)
+			weapon_activated.emit(Enums.WEAPON.FLAME)
 
 
 func _attack_ended() -> void:
+	print_debug("attack_ended")
 	current_attack.queue_free()
 	current_attack = null
 	current_weapon = Enums.WEAPON.SLAP
@@ -56,11 +61,26 @@ func _spawn_mosquito(spawn_pos_x: float, target_pos: Vector2):
 
 func _on_mosquito_spawn_timer_timeout() -> void:
 	var spawn_area: Rect2 = $MosquitoSpawnArea/CollisionShape2D.shape.get_rect()
-	var spawn_pos_x: float = randf_range(0, spawn_area.size.x)
-	#var target_area: CollisionShape2D = $TargetArea/CollisionShape2D
-	var target_area_rect: Rect2 = $TargetArea/CollisionShape2D.shape.get_rect()
-	var target_pos: Vector2 = Vector2(randf_range(0, target_area_rect.size.x), $TargetArea.position.y)
+	var spawn_pos_x: float = randf_range(spawn_area.position.x, spawn_area.position.x + spawn_area.size.x)
+
+	var target_pos = get_human_target_pos()
+
+	if zapper.zapper_charge:
+		target_pos = zapper.position
+
 	_spawn_mosquito(spawn_pos_x, target_pos)
+
+
+func get_human_target_pos() -> Vector2:
+	var target_area_rect: Rect2 = $TargetArea/CollisionShape2D.shape.get_rect()
+
+	return Vector2(
+		randf_range(
+			target_area_rect.position.x,
+			target_area_rect.position.x + target_area_rect.size.x,
+		),
+		$TargetArea.position.y,
+	)
 
 
 func _on_end_area_body_entered(body: Node2D) -> void:
@@ -73,5 +93,21 @@ func change_weapon_to_spray() -> void:
 	current_weapon = Enums.WEAPON.SPRAY
 
 
+func change_weapon_to_flame() -> void:
+	print_debug("weapon changed to flame")
+	current_weapon = Enums.WEAPON.FLAME
+
+
 func recharge_zapper() -> void:
 	zapper.recharge()
+
+	for child in get_children():
+		if child is Mosquito:
+			child.set_target(zapper.position)
+
+
+func _on_zapper_depleted() -> void:
+	for child in get_children():
+		if child is Mosquito:
+			child.set_target(get_human_target_pos())
+

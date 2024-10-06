@@ -1,32 +1,32 @@
-[gd_scene load_steps=7 format=3 uid="uid://c7lk6ud4k38j0"]
+[gd_scene load_steps=5 format=3 uid="uid://c7lk6ud4k38j0"]
 
 [ext_resource type="Script" path="res://scenes/main_game/annoyance_meter.gd" id="1_74d23"]
 
 [sub_resource type="ImageTexture" id="ImageTexture_3uic6"]
 
-[sub_resource type="ImageTexture" id="ImageTexture_tb67v"]
-
-[sub_resource type="ImageTexture" id="ImageTexture_dgyxn"]
-
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_nas1e"]
+color = Color(0, 0, 0, 0)
 thickness = 50
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_npevx"]
-bg_color = Color(0.971956, 0.394034, 5.77569e-07, 1)
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [node name="AnnoyanceMeter" type="Node2D"]
 script = ExtResource("1_74d23")
 
 [node name="HSlider" type="HSlider" parent="."]
-offset_right = 507.0
+z_index = 2
+offset_right = 603.0
 offset_bottom = 72.0
 focus_mode = 0
 mouse_filter = 2
 theme_override_icons/grabber = SubResource("ImageTexture_3uic6")
-theme_override_icons/grabber_highlight = SubResource("ImageTexture_tb67v")
-theme_override_icons/grabber_disabled = SubResource("ImageTexture_dgyxn")
 theme_override_styles/slider = SubResource("StyleBoxLine_nas1e")
 theme_override_styles/grabber_area = SubResource("StyleBoxFlat_npevx")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_npevx")
 step = 0.1
 value = 100.0
+editable = false
+scrollable = false
+
+[connection signal="value_changed" from="HSlider" to="." method="_on_h_slider_value_changed"]

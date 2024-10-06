@@ -1,17 +1,17 @@
 extends Node
 
 enum TileColor {
+	DARKBLUE,
+	LIGHTBLUE,
+	ORANGE,
 	RED,
-	GREEN,
-	BLUE,
 	YELLOW,
-	BROWN,
-	PURPLE,
 }
 
 enum WEAPON {
 	SLAP,
 	SPRAY,
+	FLAME,
 }
 
 enum TileIcon {
@@ -35,18 +35,16 @@ func get_random_tile_color() -> TileColor:
 
 func color_to_string(color: TileColor) -> String:
 	match color:
+		TileColor.DARKBLUE:
+			return "Dark Blue"
+		TileColor.LIGHTBLUE:
+			return "Light Blue"
+		TileColor.ORANGE:
+			return "Orange"
 		TileColor.RED:
 			return "Red"
-		TileColor.GREEN:
-			return "Green"
-		TileColor.BLUE:
-			return "Blue"
 		TileColor.YELLOW:
 			return "Yellow"
-		TileColor.BROWN:
-			return "Brown"
-		TileColor.PURPLE:
-			return "Purple"
 
 	return "Unknown"
 
@@ -55,7 +53,7 @@ func get_random_tile_icon() -> TileIcon:
 	var icons = TileIcon.values()
 
 	# Most of the time you get NONE
-	var index = rng.randi() % 12
+	var index = rng.randi() % 5
 
 	if index >= icons.size():
 		return TileIcon.NONE

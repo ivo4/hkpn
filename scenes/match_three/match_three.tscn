@@ -9,8 +9,12 @@ script = ExtResource("1_rvpdl")
 metadata/_edit_group_ = true
 
 [node name="Grid" type="Area2D" parent="."]
-position = Vector2(50, 50)
+position = Vector2(32, 32)
 script = ExtResource("1_u838c")
 tile_scene = ExtResource("2_eikr5")
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Grid"]
+bus = &"SFX"
+
+[connection signal="icon_collected" from="Grid" to="." method="_on_grid_icon_collected"]
 [connection signal="matched" from="Grid" to="." method="_on_grid_matched"]

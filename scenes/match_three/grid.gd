@@ -5,6 +5,17 @@ extends Area2D
 signal matched(count: int, color: Enums.TileColor)
 signal icon_collected(icon: Enums.TileIcon)
 
+@onready var audio = $AudioStreamPlayer
+
+const slide_sounds = [
+	preload("res://assets/audio/sfx/ruudu_slide1.wav"),
+	preload("res://assets/audio/sfx/ruudu_slide2.wav"),
+	preload("res://assets/audio/sfx/ruudu_slide3.wav"),
+	preload("res://assets/audio/sfx/ruudu_slide4.wav"),
+]
+
+var slide_sound_index: int = 0
+
 const rows: int = 7
 const columns: int = 7
 const tile_size: int = 64
@@ -43,6 +54,10 @@ func _on_tile_drag_started(tile: Tile):
 	if !animation_count:
 		dragged_tile = tile
 		set_process_input(true)
+
+		audio.stream = slide_sounds[slide_sound_index]
+		slide_sound_index = (slide_sound_index + 1) % slide_sounds.size()
+		audio.play()
 
 func _on_tile_movement_ended(_tile: Tile):
 	animation_count -= 1
@@ -113,8 +128,11 @@ func on_drag_end(mouse_pos: Vector2):
 	var diff = get_drag_diff(mouse_pos)
 
 	if (get_drag_neighbour(diff) && diff.length() > tile_size_with_gap * 0.5):
-		# TODO only if would create a match?
 		swap_tiles()
+
+		if find_matches().is_empty():
+			# Swap back
+			swap_tiles()
 
 	start_movement(dragged_tile)
 
@@ -149,7 +167,7 @@ func check_for_matches():
 	for tileMatch in matches:
 		var count = tileMatch.size()
 		var color = tileMatch[0].color
-		emit_signal("matched", count, color)
+		matched.emit(count, color)
 
 		# TODO remove
 		print("Matched ", count, " ", Enums.color_to_string(color))
@@ -159,7 +177,7 @@ func check_for_matches():
 			animation_count += 1
 
 			if tile.icon != Enums.TileIcon.NONE:
-				emit_signal("icon_collected", tile.icon)
+				icon_collected.emit(tile.icon)
 
 	# TODO if no matches, check whether any matches are possible to make.
 	# If not, shuffle the board? Or game over.

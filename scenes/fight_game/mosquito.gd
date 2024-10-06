@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+class_name Mosquito
+
 const SPEED = 30.0
 
 var target_pos: Vector2
