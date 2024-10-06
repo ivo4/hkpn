@@ -9,6 +9,7 @@ signal weapon_activated(weapon: Enums.WEAPON)
 var mosquito_scene: PackedScene = preload("res://scenes/fight_game/mosquito.tscn")
 var slap_attack: PackedScene = preload("res://scenes/fight_game/attacks/slap.tscn")
 var spray_attack: PackedScene = preload("res://scenes/fight_game/attacks/spray.tscn")
+var flame_attack: PackedScene = preload("res://scenes/fight_game/attacks/flame.tscn")
 
 var current_weapon: Enums.WEAPON = Enums.WEAPON.SLAP
 var current_attack
@@ -19,9 +20,6 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	#if not get_viewport_rect().has_point(event.position):
-		#print_debug("not in viewport")
-		#return
 	if (event.is_action_pressed("Attack")):
 		if (current_attack != null):
 			return
@@ -38,9 +36,16 @@ func _input(event: InputEvent) -> void:
 			current_attack.attack_ended.connect(_attack_ended)
 			add_child(current_attack)
 			weapon_activated.emit(Enums.WEAPON.SPRAY)
+		if (current_weapon == Enums.WEAPON.FLAME):
+			current_attack = flame_attack.instantiate()
+			current_attack.position = $Human.position
+			current_attack.attack_ended.connect(_attack_ended)
+			add_child(current_attack)
+			weapon_activated.emit(Enums.WEAPON.FLAME)
 
 
 func _attack_ended() -> void:
+	print_debug("attack_ended")
 	current_attack.queue_free()
 	current_attack = null
 	current_weapon = Enums.WEAPON.SLAP
@@ -71,6 +76,11 @@ func _on_end_area_body_entered(body: Node2D) -> void:
 func change_weapon_to_spray() -> void:
 	print_debug("weapon changed to spray")
 	current_weapon = Enums.WEAPON.SPRAY
+
+
+func change_weapon_to_flame() -> void:
+	print_debug("weapon changed to flame")
+	current_weapon = Enums.WEAPON.FLAME
 
 
 func recharge_zapper() -> void:

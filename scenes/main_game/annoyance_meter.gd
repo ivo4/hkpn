@@ -9,7 +9,7 @@ var current_annoyance_value: float = 0
 func _ready() -> void:
 	slider.max_value = max_annoyance_value
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	slider.value = current_annoyance_value
 
 func deal_damage(amount: float) -> void:
