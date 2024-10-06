@@ -73,6 +73,7 @@ stream = ExtResource("9_7ygxm")
 autoplay = true
 bus = &"Music"
 
+[connection signal="icon_collected" from="SubViewportContainer/SubViewport/MatchThree" to="." method="_on_match_three_icon_collected"]
 [connection signal="matched" from="SubViewportContainer/SubViewport/MatchThree" to="." method="_on_match_three_matched"]
 [connection signal="damage" from="SubViewportContainer2/SubViewport/FightGame" to="." method="_on_fight_game_damage"]
 [connection signal="weapon_activated" from="SubViewportContainer2/SubViewport/FightGame" to="." method="_on_fight_game_weapon_activated"]

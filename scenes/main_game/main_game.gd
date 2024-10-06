@@ -56,7 +56,6 @@ func _on_match_three_matched(count: int, _color: Enums.TileColor) -> void:
 		flame_powerup.increase_value(count)
 
 
-# TODO connect in scene
 func _on_match_three_icon_collected(icon: Enums.TileIcon) -> void:
 	if icon == Enums.TileIcon.SPRAY:
 		spray_powerup.increase_value(1)
