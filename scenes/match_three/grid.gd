@@ -14,6 +14,10 @@ const slide_sounds = [
 	preload("res://assets/audio/sfx/ruudu_slide4.wav"),
 ]
 
+const combo3_sound = preload("res://assets/audio/sfx/kombo3.wav")
+const combo4_sound = preload("res://assets/audio/sfx/kombo4.wav")
+const combo5_sound = preload("res://assets/audio/sfx/kombo5.wav")
+
 var slide_sound_index: int = 0
 
 const rows: int = 7
@@ -168,6 +172,16 @@ func check_for_matches():
 		var count = tileMatch.size()
 		var color = tileMatch[0].color
 		matched.emit(count, color)
+
+		if count == 3:
+			audio.stream = combo3_sound
+			audio.play()
+		elif count == 4:
+			audio.stream = combo4_sound
+			audio.play()
+		elif count >= 5:
+			audio.stream = combo5_sound
+			audio.play()
 
 		# TODO remove
 		print("Matched ", count, " ", Enums.color_to_string(color))
