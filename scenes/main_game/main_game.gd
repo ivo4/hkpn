@@ -61,3 +61,7 @@ func _on_match_three_icon_collected(icon: Enums.TileIcon) -> void:
 		spray_powerup.increase_value(1)
 	elif icon == Enums.TileIcon.ZAPPER:
 		zapper_powerup.increase_value(1)
+
+
+func _on_annoyance_meter_annoyance_filled() -> void:
+	get_tree().change_scene_to_file("res://scenes/menus/game_over.tscn")

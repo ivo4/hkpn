@@ -30,3 +30,5 @@ theme_override_styles/grabber_area = SubResource("StyleBoxFlat_npevx")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_npevx")
 step = 0.1
 value = 100.0
+
+[connection signal="value_changed" from="HSlider" to="." method="_on_h_slider_value_changed"]
