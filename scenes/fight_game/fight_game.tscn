@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://scenes/fight_game/fight_game.gd" id="1_sfgrc"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_8t20j"]
+a = Vector2(130, 0)
 b = Vector2(512, 0)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r86mb"]
@@ -53,6 +54,9 @@ color = Color(0.419813, 0.419813, 0.419813, 1)
 position = Vector2(258, 488)
 
 [node name="ColorRect" type="ColorRect" parent="Human"]
+anchors_preset = -1
+anchor_top = 88.0
+anchor_bottom = 88.0
 offset_left = -20.0
 offset_top = -20.0
 offset_right = 20.0
@@ -77,7 +81,7 @@ position = Vector2(0, -8)
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EndArea"]
-position = Vector2(256, 495.5)
+position = Vector2(256, 583.5)
 shape = SubResource("RectangleShape2D_r86mb")
 
 [node name="ZapperArea" type="Area2D" parent="."]
@@ -86,18 +90,18 @@ collision_layer = 0
 script = SubResource("GDScript_o0vve")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ZapperArea"]
-position = Vector2(20, -8)
+position = Vector2(20, 80)
 shape = SubResource("RectangleShape2D_k5sve")
 
 [node name="ColorRect" type="ColorRect" parent="ZapperArea"]
 offset_left = -236.0
-offset_top = -18.0
+offset_top = 70.0
 offset_right = 276.0
-offset_bottom = 2.0
+offset_bottom = 90.0
 color = Color(0.266667, 1, 1, 0.521569)
 
 [node name="TargetArea" type="Area2D" parent="."]
-position = Vector2(49, 512)
+position = Vector2(49, 600)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TargetArea"]
 shape = SubResource("SegmentShape2D_kotbo")
