@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://60upqoj4qxx5"]
+[gd_scene load_steps=18 format=3 uid="uid://60upqoj4qxx5"]
 
 [ext_resource type="Script" path="res://scenes/menus/main_menu.gd" id="1_2sra7"]
 [ext_resource type="Texture2D" uid="uid://ubetet6hpump" path="res://assets/ui/start_backround.png" id="1_i4b48"]
@@ -34,6 +34,10 @@ texture_margin_left = 42.0
 texture_margin_top = 40.0
 texture_margin_right = 47.0
 texture_margin_bottom = 42.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_7thlj"]
+font_size = 26
+font_color = Color(0, 0.00392157, 0.0235294, 1)
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -128,6 +132,7 @@ scale = Vector2(0.34, 0.34)
 texture = ExtResource("5_mcvjw")
 
 [node name="Settings" type="Control" parent="."]
+visible = false
 anchors_preset = 0
 offset_right = 1152.0
 offset_bottom = 648.0
@@ -185,6 +190,47 @@ offset_bottom = 1805.0
 scale = Vector2(0.09, 0.09)
 texture_normal = ExtResource("12_f0n8o")
 
+[node name="Tutorial" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Background" type="TextureRect" parent="Tutorial"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1112.0
+offset_bottom = 608.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_i4b48")
+expand_mode = 5
+
+[node name="TutorialCloseButton" type="TextureButton" parent="Tutorial"]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 480.0
+offset_right = 2279.0
+offset_bottom = 1805.0
+scale = Vector2(0.09, 0.09)
+texture_normal = ExtResource("12_f0n8o")
+
+[node name="Label" type="Label" parent="Tutorial"]
+layout_mode = 0
+offset_left = 99.0
+offset_top = 124.0
+offset_right = 1061.0
+offset_bottom = 433.0
+text = "Kill mosquitoes by clicking on them OR swap adjacent tiles to make matches
+
+Matches with icons charge power-ups:
+- The bug spray makes your clicks more DEADLY 💀
+- The bug zapper attracts and kills mosquitoes ⚡
+
+Matches of 4 or more tiles charge THE FLAMETHROWER! 🔥"
+label_settings = SubResource("LabelSettings_7thlj")
+
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="TutorialButton" to="." method="_on_tutorial_button_pressed"]
 [connection signal="pressed" from="SettingsButton" to="." method="_on_settings_button_pressed"]
@@ -192,3 +238,4 @@ texture_normal = ExtResource("12_f0n8o")
 [connection signal="value_changed" from="Settings/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
 [connection signal="pressed" from="Settings/SettingsCloseButton" to="." method="_on_settings_close_button_pressed"]
 [connection signal="pressed" from="Credits/CreditsCloseButton" to="." method="_on_credits_close_button_pressed"]
+[connection signal="pressed" from="Tutorial/TutorialCloseButton" to="." method="_on_tutorial_close_button_pressed"]

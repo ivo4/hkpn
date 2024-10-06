@@ -5,6 +5,7 @@ extends Control
 func _ready() -> void:
 	$Settings.visible = false
 	$Credits.visible = false
+	$Tutorial.visible = false
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -17,7 +18,11 @@ func _on_start_button_pressed() -> void:
 
 
 func _on_tutorial_button_pressed() -> void:
-	print_debug("tutorial")
+	$Tutorial.visible = true
+
+
+func _on_tutorial_close_button_pressed() -> void:
+	$Tutorial.visible = false
 
 
 func _on_settings_button_pressed() -> void:
