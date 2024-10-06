@@ -53,7 +53,7 @@ func get_random_tile_icon() -> TileIcon:
 	var icons = TileIcon.values()
 
 	# Most of the time you get NONE
-	var index = rng.randi() % 10
+	var index = rng.randi() % 5
 
 	if index >= icons.size():
 		return TileIcon.NONE

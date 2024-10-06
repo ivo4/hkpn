@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bewdaaqts4yb4"]
+[gd_scene load_steps=4 format=3 uid="uid://d1wxrdge8qirt"]
 
 [ext_resource type="Script" path="res://scenes/fight_game/mosquito.gd" id="1_gxv7r"]
 [ext_resource type="Texture2D" uid="uid://bp3p41y032h1j" path="res://assets/characters/characters.png" id="2_johp6"]
@@ -14,5 +14,5 @@ shape = SubResource("CircleShape2D_lhh58")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 5
-scale = Vector2(0.25, 0.25)
+scale = Vector2(0.12, 0.12)
 texture = ExtResource("2_johp6")
