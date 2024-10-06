@@ -38,7 +38,7 @@ texture_margin_bottom = 42.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_2mbup"]
 font = ExtResource("13_mepes")
-font_size = 44
+font_size = 40
 font_color = Color(0.8, 0, 0, 1)
 shadow_size = 9
 shadow_color = Color(0, 0, 0, 1)
@@ -222,16 +222,17 @@ texture_normal = ExtResource("12_f0n8o")
 
 [node name="Label" type="Label" parent="Tutorial"]
 layout_mode = 0
-offset_left = 110.0
-offset_top = 55.0
-offset_right = 1072.0
-offset_bottom = 458.0
+offset_left = 109.0
+offset_top = 49.0
+offset_right = 1071.0
+offset_bottom = 473.0
 text = "Kill mosquitoes by clicking on them OR swap adjacent tiles
 to make matches
 
 Matches with icons charge power-ups:
 - The bug spray makes your clicks more DEADLY 💀
 - The bug zapper attracts and kills mosquitoes ⚡
+- The cream reduces irritation 🌿
 
 Matches of 4 or more tiles charge THE FLAMETHROWER! 🔥"
 label_settings = SubResource("LabelSettings_2mbup")
