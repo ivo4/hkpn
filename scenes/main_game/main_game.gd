@@ -52,11 +52,13 @@ func _on_flame_powerup_button_powerup_activated() -> void:
 
 
 func _on_match_three_matched(count: int, color: Enums.TileColor) -> void:
-	if color == Enums.TileColor.GREEN:
-		spray_powerup.increase_value(count)
-	elif color == Enums.TileColor.BLUE:
-		zapper_powerup.increase_value(count)
-	elif color == Enums.TileColor.YELLOW:
-		cream_powerup.increase_value(count)
-	elif color == Enums.TileColor.RED:
+	if count > 3:
 		flame_powerup.increase_value(count)
+
+
+# TODO connect in scene
+func _on_match_three_icon_collected(icon: Enums.TileIcon) -> void:
+	if icon == Enums.TileIcon.SPRAY:
+		spray_powerup.increase_value(1)
+	elif icon == Enums.TileIcon.ZAPPER:
+		zapper_powerup.increase_value(1)

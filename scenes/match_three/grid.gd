@@ -113,8 +113,11 @@ func on_drag_end(mouse_pos: Vector2):
 	var diff = get_drag_diff(mouse_pos)
 
 	if (get_drag_neighbour(diff) && diff.length() > tile_size_with_gap * 0.5):
-		# TODO only if would create a match?
 		swap_tiles()
+
+		if find_matches().is_empty():
+			# Swap back
+			swap_tiles()
 
 	start_movement(dragged_tile)
 

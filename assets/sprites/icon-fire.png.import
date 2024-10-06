@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3riv4dserpax"
-path="res://.godot/imported/bugspray-icon.png-c25a1e2c42ed529a6e831646fa04e9da.ctex"
+uid="uid://c78rd37qqevru"
+path="res://.godot/imported/icon-fire.png-82a1cd8b5119254cdcc14a0e2c8e8b6f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/bugspray-icon.png"
-dest_files=["res://.godot/imported/bugspray-icon.png-c25a1e2c42ed529a6e831646fa04e9da.ctex"]
+source_file="res://assets/sprites/icon-fire.png"
+dest_files=["res://.godot/imported/icon-fire.png-82a1cd8b5119254cdcc14a0e2c8e8b6f.ctex"]
 
 [params]
 

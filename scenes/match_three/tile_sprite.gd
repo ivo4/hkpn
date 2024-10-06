@@ -1,11 +1,10 @@
 extends Sprite2D
 
-@export var texture_red: Texture
-@export var texture_green: Texture
-@export var texture_blue: Texture
-@export var texture_yellow: Texture
-@export var texture_brown: Texture
-@export var texture_purple: Texture
+const textureDarkBlue = preload("res://assets/sprites/tile-darkblue.png")
+const textureLightBlue = preload("res://assets/sprites/tile-lightblue.png")
+const textureOrange = preload("res://assets/sprites/tile-orange.png")
+const textureRed = preload("res://assets/sprites/tile-red.png")
+const textureYellow = preload("res://assets/sprites/tile-yellow.png")
 
 const TileColor = Enums.TileColor
 
@@ -13,18 +12,16 @@ func _ready():
 	var tile: Tile = get_parent()
 
 	match tile.color:
+		TileColor.DARKBLUE:
+			texture = textureDarkBlue
+		TileColor.LIGHTBLUE:
+			texture = textureLightBlue
+		TileColor.ORANGE:
+			texture = textureOrange
 		TileColor.RED:
-			texture = texture_red
-		TileColor.GREEN:
-			texture = texture_green
-		TileColor.BLUE:
-			texture = texture_blue
-		TileColor.YELLOW:
-			texture = texture_yellow
-		TileColor.BROWN:
-			texture = texture_brown
+			texture = textureRed
 		_:
-			texture = texture_purple
+			texture = textureYellow
 
 func _process(_delta):
 	pass

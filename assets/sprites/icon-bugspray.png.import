@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6cqsn16espm1"
-path="res://.godot/imported/tile-purple.png-34d2de444519351500fdc5cf66ab10c9.ctex"
+uid="uid://bwaof5r2yjelm"
+path="res://.godot/imported/icon-bugspray.png-ed46d7687daf5459bddd5b4c050ed306.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/tile-purple.png"
-dest_files=["res://.godot/imported/tile-purple.png-34d2de444519351500fdc5cf66ab10c9.ctex"]
+source_file="res://assets/sprites/icon-bugspray.png"
+dest_files=["res://.godot/imported/icon-bugspray.png-ed46d7687daf5459bddd5b4c050ed306.ctex"]
 
 [params]
 

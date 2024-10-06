@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwjytrkstyb2u"
-path="res://.godot/imported/tile-green.png-92012d34f5b260a2640c21b6b47ca8c4.ctex"
+uid="uid://q8htuuiq0hqv"
+path="res://.godot/imported/icon-zapper-active.png-9744b04ab9c0723390667f3fac2f141b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/tile-green.png"
-dest_files=["res://.godot/imported/tile-green.png-92012d34f5b260a2640c21b6b47ca8c4.ctex"]
+source_file="res://assets/sprites/icon-zapper-active.png"
+dest_files=["res://.godot/imported/icon-zapper-active.png-9744b04ab9c0723390667f3fac2f141b.ctex"]
 
 [params]
 
