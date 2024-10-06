@@ -16,6 +16,11 @@ var headi_5: Image = Image.load_from_file("res://assets/characters/head1.5.png")
 
 func _ready() -> void:
 	slider.max_value = max_annoyance_value
+	headi_1.rotate_90(CLOCKWISE)
+	headi_2.rotate_90(CLOCKWISE)
+	headi_3.rotate_90(CLOCKWISE)
+	headi_4.rotate_90(CLOCKWISE)
+	headi_5.rotate_90(CLOCKWISE)
 	_change_grabber_icon(headi_1)
 
 func _process(_delta: float) -> void:

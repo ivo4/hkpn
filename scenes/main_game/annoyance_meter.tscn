@@ -5,17 +5,18 @@
 [sub_resource type="ImageTexture" id="ImageTexture_3uic6"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_nas1e"]
+color = Color(0, 0, 0, 0)
 thickness = 50
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_npevx"]
-bg_color = Color(0.971956, 0.394034, 5.77569e-07, 1)
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [node name="AnnoyanceMeter" type="Node2D"]
 script = ExtResource("1_74d23")
 
 [node name="HSlider" type="HSlider" parent="."]
 z_index = 2
-offset_right = 507.0
+offset_right = 603.0
 offset_bottom = 72.0
 focus_mode = 0
 mouse_filter = 2

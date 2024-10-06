@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/main_game/powerup_button.gd" id="1_d436u"]
 [ext_resource type="Texture2D" uid="uid://c3goc4l0ti4vj" path="res://assets/sprites/tile-red.png" id="2_q8ln7"]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_u6q3l"]
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_lunmh"]
 size = Vector2(444, 444)
 
 [node name="PowerupButton" type="Node2D"]
@@ -18,9 +18,9 @@ centered = false
 
 [node name="ButtonProgressMask" type="Sprite2D" parent="."]
 clip_children = 1
-texture = SubResource("PlaceholderTexture2D_u6q3l")
+texture = SubResource("PlaceholderTexture2D_lunmh")
 centered = false
-offset = Vector2(0, 1236)
+offset = Vector2(0, 333)
 region_rect = Rect2(0, 0, 64, 64)
 
 [node name="TextureButton" type="TextureButton" parent="ButtonProgressMask"]
