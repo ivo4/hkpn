@@ -21,7 +21,6 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	elapsed_time_ms += delta
-	$ClockLabel.text = str(elapsed_time_ms)
 
 
 func _on_fight_game_damage(amount: float) -> void:

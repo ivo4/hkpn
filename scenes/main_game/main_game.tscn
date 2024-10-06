@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://fthb7bhebrxs"]
+[gd_scene load_steps=13 format=3 uid="uid://fthb7bhebrxs"]
 
 [ext_resource type="Script" path="res://scenes/main_game/main_game.gd" id="1_q5wl0"]
 [ext_resource type="PackedScene" uid="uid://b15db2i8qrcjd" path="res://scenes/match_three/match_three.tscn" id="2_2yqlu"]
@@ -12,9 +12,6 @@
 [ext_resource type="Texture2D" uid="uid://c78rd37qqevru" path="res://assets/sprites/icon-fire.png" id="8_rmfes"]
 [ext_resource type="AudioStream" uid="uid://cuj4rpyksrlh0" path="res://assets/audio/music/kidratrack.wav" id="9_7ygxm"]
 [ext_resource type="Texture2D" uid="uid://dgobx5bgmuej2" path="res://assets/ui/frame.png" id="12_edn37"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_37dg6"]
-font_size = 32
 
 [node name="MainGame" type="Node2D"]
 script = ExtResource("1_q5wl0")
@@ -95,14 +92,6 @@ autoplay = true
 bus = &"Music"
 
 [node name="Timer" type="Timer" parent="."]
-
-[node name="ClockLabel" type="Label" parent="."]
-offset_left = 1014.0
-offset_top = 556.0
-offset_right = 1106.0
-offset_bottom = 601.0
-text = "asdfw"
-label_settings = SubResource("LabelSettings_37dg6")
 
 [connection signal="icon_collected" from="SubViewportContainer/SubViewport/MatchThree" to="." method="_on_match_three_icon_collected"]
 [connection signal="matched" from="SubViewportContainer/SubViewport/MatchThree" to="." method="_on_match_three_matched"]
