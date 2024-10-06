@@ -9,7 +9,7 @@ script = ExtResource("1_rvpdl")
 metadata/_edit_group_ = true
 
 [node name="Grid" type="Area2D" parent="."]
-position = Vector2(50, 50)
+position = Vector2(32, 32)
 script = ExtResource("1_u838c")
 tile_scene = ExtResource("2_eikr5")
 

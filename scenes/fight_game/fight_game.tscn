@@ -44,6 +44,7 @@ b = Vector2(0, 0)
 script = ExtResource("1_sfgrc")
 
 [node name="Background" type="ColorRect" parent="."]
+visible = false
 offset_right = 512.0
 offset_bottom = 512.0
 color = Color(0.419813, 0.419813, 0.419813, 1)
