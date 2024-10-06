@@ -2,7 +2,7 @@ extends Node2D
 
 signal damage(amount: float)
 signal weapon_activated(weapon: Enums.WEAPON)
-
+signal mosquito_burned
 
 @onready var zapper: Area2D = $ZapperArea
 
@@ -10,6 +10,10 @@ var mosquito_scene: PackedScene = preload("res://scenes/fight_game/mosquito.tscn
 var slap_attack: PackedScene = preload("res://scenes/fight_game/attacks/slap.tscn")
 var spray_attack: PackedScene = preload("res://scenes/fight_game/attacks/spray.tscn")
 var flame_attack: PackedScene = preload("res://scenes/fight_game/attacks/flame.tscn")
+
+var boy_sprite1: Texture = preload("res://assets/characters/boy-1.png")
+var boy_sprite2: Texture = preload("res://assets/characters/boy-2.png")
+var boy_sprite3: Texture = preload("res://assets/characters/boy-3.png")
 
 var current_weapon: Enums.WEAPON = Enums.WEAPON.SLAP
 var current_attack
@@ -40,6 +44,7 @@ func _input(event: InputEvent) -> void:
 			current_attack = flame_attack.instantiate()
 			current_attack.position = $Human.position
 			current_attack.attack_ended.connect(_attack_ended)
+			current_attack.mosquito_burned.connect(_mosquito_burned)
 			add_child(current_attack)
 			weapon_activated.emit(Enums.WEAPON.FLAME)
 
@@ -51,12 +56,21 @@ func _attack_ended() -> void:
 	current_weapon = Enums.WEAPON.SLAP
 
 
+func _mosquito_burned() -> void:
+	mosquito_burned.emit()
+
+
 func _spawn_mosquito(spawn_pos_x: float, target_pos: Vector2):
 	var mosquito = mosquito_scene.instantiate()
 	mosquito.position.x = spawn_pos_x
 	#mosquito.set_target($Human.position)
 	mosquito.set_target(target_pos)
 	add_child(mosquito)
+
+
+func _on_initial_delay_timer_timeout() -> void:
+	$InitialDelayTimer.stop()
+	$MosquitoSpawnTimer.start()
 
 
 func _on_mosquito_spawn_timer_timeout() -> void:
@@ -110,3 +124,12 @@ func _on_zapper_depleted() -> void:
 	for child in get_children():
 		if child is Mosquito:
 			child.set_target(get_human_target_pos())
+
+
+func update_annoyance(value: float) -> void:
+	if value >= 66:
+		$Human/HumanSprite.texture = boy_sprite3
+	elif value >= 33:
+		$Human/HumanSprite.texture = boy_sprite2
+	else:
+		$Human/HumanSprite.texture = boy_sprite1

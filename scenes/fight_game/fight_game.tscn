@@ -17,9 +17,20 @@ script/source = "extends Area2D
 
 signal zapper_depleted
 
+@onready var audio = $AudioStreamPlayer
+
 var zapper_max_charge: int = 10
 var zapper_charge: int = 0
 
+const zap_sounds = [
+	preload(\"res://assets/audio/sfx/moskiito_zap1.wav\"),
+	preload(\"res://assets/audio/sfx/moskiito_zap2.wav\"),
+	preload(\"res://assets/audio/sfx/moskiito_zap3.wav\"),
+	preload(\"res://assets/audio/sfx/moskiito_zap4.wav\"),
+	preload(\"res://assets/audio/sfx/moskiito_zap5.wav\"),
+]
+
+var zap_sound_index: int = 0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -30,6 +41,11 @@ func _process(_delta: float) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if (zapper_charge <= 0):
 		return
+
+	audio.stream = zap_sounds[zap_sound_index]
+	zap_sound_index = (zap_sound_index + 1) % zap_sounds.size()
+	audio.play()
+
 	body.queue_free()
 	zapper_charge -= 1
 
@@ -65,10 +81,14 @@ position = Vector2(4.99999, 38)
 scale = Vector2(0.150685, 0.150685)
 texture = ExtResource("2_50jvd")
 
+[node name="InitialDelayTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
 [node name="MosquitoSpawnTimer" type="Timer" parent="."]
 process_callback = 0
 wait_time = 0.5
-autostart = true
 
 [node name="MosquitoSpawnArea" type="Area2D" parent="."]
 collision_layer = 0
@@ -101,12 +121,15 @@ texture = ExtResource("3_a6p3t")
 position = Vector2(0.25, 0.75)
 shape = SubResource("RectangleShape2D_k5sve")
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ZapperArea"]
+
 [node name="TargetArea" type="Area2D" parent="."]
 position = Vector2(49, 600)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TargetArea"]
 shape = SubResource("SegmentShape2D_kotbo")
 
+[connection signal="timeout" from="InitialDelayTimer" to="." method="_on_initial_delay_timer_timeout"]
 [connection signal="timeout" from="MosquitoSpawnTimer" to="." method="_on_mosquito_spawn_timer_timeout"]
 [connection signal="body_entered" from="EndArea" to="." method="_on_end_area_body_entered"]
 [connection signal="body_entered" from="ZapperArea" to="ZapperArea" method="_on_body_entered"]
