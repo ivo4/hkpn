@@ -13,7 +13,6 @@ func _process(delta: float) -> void:
 
 
 func _on_start_button_pressed() -> void:
-	print_debug("start")
 	get_tree().change_scene_to_file("res://scenes/main_game/main_game.tscn")
 
 
@@ -22,22 +21,18 @@ func _on_tutorial_button_pressed() -> void:
 
 
 func _on_settings_button_pressed() -> void:
-	print_debug("settings")
 	$Settings.visible = true
 
 
 func _on_settings_close_button_pressed() -> void:
-	print_debug("settings close")
 	$Settings.visible = false
 
 
 func _on_credits_button_pressed() -> void:
-	print_debug("credits")
 	$Credits.visible = true
 
 
 func _on_credits_close_button_pressed() -> void:
-	print_debug("credits close")
 	$Credits.visible = false
 
 

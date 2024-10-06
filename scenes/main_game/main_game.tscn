@@ -59,9 +59,15 @@ max_value = 6
 current_value = 0
 button_texture = ExtResource("8_rmfes")
 
+[node name="FlamePowerupButton" parent="." instance=ExtResource("5_fn8f8")]
+position = Vector2(378, 536)
+max_value = 12
+current_value = 12
+
 [connection signal="matched" from="SubViewportContainer/SubViewport/MatchThree" to="." method="_on_match_three_matched"]
 [connection signal="damage" from="SubViewportContainer2/SubViewport/FightGame" to="." method="_on_fight_game_damage"]
 [connection signal="weapon_activated" from="SubViewportContainer2/SubViewport/FightGame" to="." method="_on_fight_game_weapon_activated"]
 [connection signal="powerup_activated" from="SprayPowerupButton" to="." method="_on_spray_powerup_button_powerup_activated"]
 [connection signal="powerup_activated" from="ZapperPowerupButton" to="." method="_on_zapper_powerup_button_powerup_activated"]
 [connection signal="powerup_activated" from="SoothingCreamPowerupButton" to="." method="_on_soothing_cream_powerup_button_powerup_activated"]
+[connection signal="powerup_activated" from="FlamePowerupButton" to="." method="_on_flame_powerup_button_powerup_activated"]

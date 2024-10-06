@@ -11,6 +11,7 @@ enum TileColor {
 enum WEAPON {
 	SLAP,
 	SPRAY,
+	FLAME,
 }
 
 enum TileIcon {
