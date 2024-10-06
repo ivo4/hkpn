@@ -67,6 +67,10 @@ func _on_match_three_icon_collected(icon: Enums.TileIcon) -> void:
 		cream_powerup.increase_value(1)
 
 
+func _on_annoyance_meter_annoyance_changed(newValue: float) -> void:
+	fight_game.update_annoyance(newValue)
+
+
 func _on_annoyance_meter_annoyance_filled() -> void:
 	Global.last_result = elapsed_time_ms
 	get_tree().change_scene_to_file("res://scenes/menus/game_over.tscn")

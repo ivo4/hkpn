@@ -1,5 +1,6 @@
 extends Node2D
 
+signal annoyance_changed(newValue: float)
 signal annoyance_filled
 
 @onready var slider: Slider = $HSlider
@@ -34,9 +35,11 @@ func _change_grabber_icon(image: Image) -> void:
 
 func deal_damage(amount: float) -> void:
 	current_annoyance_value += amount
+	annoyance_changed.emit(current_annoyance_value)
 
 func recover_damage(amount: float) -> void:
 	current_annoyance_value -= amount
+	annoyance_changed.emit(current_annoyance_value)
 
 func _on_h_slider_value_changed(value: float) -> void:
 	if (value > 80):

@@ -123,6 +123,7 @@ texture = ExtResource("17_stmip")
 [connection signal="matched" from="SubViewportContainer/SubViewport/MatchThree" to="." method="_on_match_three_matched"]
 [connection signal="damage" from="SubViewportContainer2/SubViewport/FightGame" to="." method="_on_fight_game_damage"]
 [connection signal="weapon_activated" from="SubViewportContainer2/SubViewport/FightGame" to="." method="_on_fight_game_weapon_activated"]
+[connection signal="annoyance_changed" from="AnnoyanceMeter" to="." method="_on_annoyance_meter_annoyance_changed"]
 [connection signal="annoyance_filled" from="AnnoyanceMeter" to="." method="_on_annoyance_meter_annoyance_filled"]
 [connection signal="powerup_activated" from="SprayPowerupButton" to="." method="_on_spray_powerup_button_powerup_activated"]
 [connection signal="powerup_activated" from="ZapperPowerupButton" to="." method="_on_zapper_powerup_button_powerup_activated"]
