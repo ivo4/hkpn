@@ -87,9 +87,6 @@ position = Vector2(576, 324)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("12_edn37")
 
-[node name="MatchThree" parent="." instance=ExtResource("2_2yqlu")]
-position = Vector2(584, 208)
-
 [connection signal="icon_collected" from="SubViewportContainer/SubViewport/MatchThree" to="." method="_on_match_three_icon_collected"]
 [connection signal="matched" from="SubViewportContainer/SubViewport/MatchThree" to="." method="_on_match_three_matched"]
 [connection signal="damage" from="SubViewportContainer2/SubViewport/FightGame" to="." method="_on_fight_game_damage"]
