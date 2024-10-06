@@ -1,4 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://c0ohvlrwpmo0i"]
+[gd_scene load_steps=7 format=3 uid="uid://c0ohvlrwpmo0i"]
+
+[ext_resource type="AudioStream" uid="uid://jwfibe7mmn7l" path="res://assets/audio/sfx/sprei1.wav" id="1_s5lyl"]
+[ext_resource type="Texture2D" uid="uid://cneicg5ctuylt" path="res://assets/sprites/cloud.png" id="1_uin1l"]
 
 [sub_resource type="GDScript" id="GDScript_6hmtw"]
 script/source = "extends CharacterBody2D
@@ -53,28 +56,6 @@ _data = {
 "attack": SubResource("Animation_3vp84")
 }
 
-[sub_resource type="Gradient" id="Gradient_v8fbf"]
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_uj5hc"]
-gradient = SubResource("Gradient_v8fbf")
-width = 288
-height = 288
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0.5, 0)
-
-[sub_resource type="Gradient" id="Gradient_21gwx"]
-colors = PackedColorArray(0.0324, 0.36, 0.31086, 1, 0.276406, 0.392117, 0.351731, 0.792157)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_7afqq"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7w61i"]
-width = 288
-height = 288
-color_ramp = SubResource("Gradient_21gwx")
-noise = SubResource("FastNoiseLite_7afqq")
-
 [node name="Spray" type="CharacterBody2D"]
 script = SubResource("GDScript_6hmtw")
 
@@ -89,9 +70,12 @@ libraries = {
 }
 autoplay = "attack"
 
-[node name="CircleMask" type="Sprite2D" parent="."]
-clip_children = 1
-texture = SubResource("GradientTexture2D_uj5hc")
+[node name="Cloud" type="Sprite2D" parent="."]
+modulate = Color(0.51, 1, 0.526333, 0.435294)
+position = Vector2(0.871892, 1.21875)
+scale = Vector2(0.175778, 0.175778)
+texture = ExtResource("1_uin1l")
 
-[node name="SprayCloud" type="Sprite2D" parent="CircleMask"]
-texture = SubResource("NoiseTexture2D_7w61i")
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_s5lyl")
+autoplay = true
