@@ -68,6 +68,11 @@ func _spawn_mosquito(spawn_pos_x: float, target_pos: Vector2):
 	add_child(mosquito)
 
 
+func _on_initial_delay_timer_timeout() -> void:
+	$InitialDelayTimer.stop()
+	$MosquitoSpawnTimer.start()
+
+
 func _on_mosquito_spawn_timer_timeout() -> void:
 	var spawn_area: Rect2 = $MosquitoSpawnArea/CollisionShape2D.shape.get_rect()
 	var spawn_pos_x: float = randf_range(spawn_area.position.x, spawn_area.position.x + spawn_area.size.x)

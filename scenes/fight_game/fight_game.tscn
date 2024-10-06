@@ -81,10 +81,14 @@ position = Vector2(4.99999, 38)
 scale = Vector2(0.150685, 0.150685)
 texture = ExtResource("2_50jvd")
 
+[node name="InitialDelayTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
 [node name="MosquitoSpawnTimer" type="Timer" parent="."]
 process_callback = 0
 wait_time = 0.5
-autostart = true
 
 [node name="MosquitoSpawnArea" type="Area2D" parent="."]
 collision_layer = 0
@@ -125,6 +129,7 @@ position = Vector2(49, 600)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TargetArea"]
 shape = SubResource("SegmentShape2D_kotbo")
 
+[connection signal="timeout" from="InitialDelayTimer" to="." method="_on_initial_delay_timer_timeout"]
 [connection signal="timeout" from="MosquitoSpawnTimer" to="." method="_on_mosquito_spawn_timer_timeout"]
 [connection signal="body_entered" from="EndArea" to="." method="_on_end_area_body_entered"]
 [connection signal="body_entered" from="ZapperArea" to="ZapperArea" method="_on_body_entered"]
