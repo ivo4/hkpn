@@ -17,9 +17,20 @@ script/source = "extends Area2D
 
 signal zapper_depleted
 
+@onready var audio = $AudioStreamPlayer
+
 var zapper_max_charge: int = 10
 var zapper_charge: int = 0
 
+const zap_sounds = [
+	preload(\"res://assets/audio/sfx/moskiito_zap1.wav\"),
+	preload(\"res://assets/audio/sfx/moskiito_zap2.wav\"),
+	preload(\"res://assets/audio/sfx/moskiito_zap3.wav\"),
+	preload(\"res://assets/audio/sfx/moskiito_zap4.wav\"),
+	preload(\"res://assets/audio/sfx/moskiito_zap5.wav\"),
+]
+
+var zap_sound_index: int = 0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -30,6 +41,11 @@ func _process(_delta: float) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if (zapper_charge <= 0):
 		return
+
+	audio.stream = zap_sounds[zap_sound_index]
+	zap_sound_index = (zap_sound_index + 1) % zap_sounds.size()
+	audio.play()
+
 	body.queue_free()
 	zapper_charge -= 1
 
@@ -100,6 +116,8 @@ texture = ExtResource("3_a6p3t")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ZapperArea"]
 position = Vector2(0.25, 0.75)
 shape = SubResource("RectangleShape2D_k5sve")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ZapperArea"]
 
 [node name="TargetArea" type="Area2D" parent="."]
 position = Vector2(49, 600)
