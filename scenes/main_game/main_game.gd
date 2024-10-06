@@ -51,7 +51,7 @@ func _on_flame_powerup_button_powerup_activated() -> void:
 	fight_game.change_weapon_to_flame()
 
 
-func _on_match_three_matched(count: int, color: Enums.TileColor) -> void:
+func _on_match_three_matched(count: int, _color: Enums.TileColor) -> void:
 	if count > 3:
 		flame_powerup.increase_value(count)
 
