@@ -64,7 +64,17 @@ func _on_mosquito_spawn_timer_timeout() -> void:
 	var spawn_pos_x: float = randf_range(spawn_area.position.x, spawn_area.position.x + spawn_area.size.x)
 	#var target_area: CollisionShape2D = $TargetArea/CollisionShape2D
 	var target_area_rect: Rect2 = $TargetArea/CollisionShape2D.shape.get_rect()
-	var target_pos: Vector2 = Vector2(randf_range(0, target_area_rect.size.x), $TargetArea.position.y)
+
+	var target_pos: Vector2 = Vector2(
+		randf_range(
+			target_area_rect.position.x,
+			target_area_rect.position.x + target_area_rect.size.x,
+		),
+		$TargetArea.position.y,
+	)
+
+	# TODO target zapper while active
+
 	_spawn_mosquito(spawn_pos_x, target_pos)
 
 
