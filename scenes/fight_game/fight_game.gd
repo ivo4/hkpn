@@ -62,20 +62,25 @@ func _spawn_mosquito(spawn_pos_x: float, target_pos: Vector2):
 func _on_mosquito_spawn_timer_timeout() -> void:
 	var spawn_area: Rect2 = $MosquitoSpawnArea/CollisionShape2D.shape.get_rect()
 	var spawn_pos_x: float = randf_range(spawn_area.position.x, spawn_area.position.x + spawn_area.size.x)
-	#var target_area: CollisionShape2D = $TargetArea/CollisionShape2D
+
+	var target_pos = get_human_target_pos()
+
+	if zapper.zapper_charge:
+		target_pos = zapper.position
+
+	_spawn_mosquito(spawn_pos_x, target_pos)
+
+
+func get_human_target_pos() -> Vector2:
 	var target_area_rect: Rect2 = $TargetArea/CollisionShape2D.shape.get_rect()
 
-	var target_pos: Vector2 = Vector2(
+	return Vector2(
 		randf_range(
 			target_area_rect.position.x,
 			target_area_rect.position.x + target_area_rect.size.x,
 		),
 		$TargetArea.position.y,
 	)
-
-	# TODO target zapper while active
-
-	_spawn_mosquito(spawn_pos_x, target_pos)
 
 
 func _on_end_area_body_entered(body: Node2D) -> void:
@@ -95,3 +100,14 @@ func change_weapon_to_flame() -> void:
 
 func recharge_zapper() -> void:
 	zapper.recharge()
+
+	for child in get_children():
+		if child is Mosquito:
+			child.set_target(zapper.position)
+
+
+func _on_zapper_depleted() -> void:
+	for child in get_children():
+		if child is Mosquito:
+			child.set_target(get_human_target_pos())
+
