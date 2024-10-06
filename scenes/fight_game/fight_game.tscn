@@ -130,6 +130,7 @@ bus = &"SFX"
 
 [node name="IdleAudio" type="AudioStreamPlayer" parent="ZapperArea"]
 stream = ExtResource("4_gbyki")
+volume_db = 3.0
 bus = &"SFX"
 
 [node name="TargetArea" type="Area2D" parent="."]
