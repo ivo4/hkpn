@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://60upqoj4qxx5"]
+[gd_scene load_steps=17 format=3 uid="uid://60upqoj4qxx5"]
 
 [ext_resource type="Script" path="res://scenes/menus/main_menu.gd" id="1_2sra7"]
 [ext_resource type="Texture2D" uid="uid://ubetet6hpump" path="res://assets/ui/start_backround.png" id="1_i4b48"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://boqcjpbnbkdoc" path="res://assets/ui/volumeslider_button.png" id="9_chdaf"]
 [ext_resource type="Texture2D" uid="uid://h13fu8acbaht" path="res://assets/ui/volumeslider.png" id="9_pvdeg"]
 [ext_resource type="Texture2D" uid="uid://xu1yy2hqin86" path="res://assets/ui/CREDITS.png" id="11_l46s5"]
+[ext_resource type="Texture2D" uid="uid://hw85jogullr7" path="res://assets/ui/back_button.png" id="12_f0n8o"]
 
 [sub_resource type="ImageTexture" id="ImageTexture_i3nwt"]
 
@@ -127,7 +128,6 @@ scale = Vector2(0.34, 0.34)
 texture = ExtResource("5_mcvjw")
 
 [node name="Settings" type="Control" parent="."]
-visible = false
 anchors_preset = 0
 offset_right = 1152.0
 offset_bottom = 648.0
@@ -160,10 +160,11 @@ offset_left = 46.0
 offset_top = 480.0
 offset_right = 1324.0
 offset_bottom = 1235.0
-scale = Vector2(0.17, 0.17)
-texture_normal = ExtResource("2_5wi32")
+scale = Vector2(0.09, 0.09)
+texture_normal = ExtResource("12_f0n8o")
 
 [node name="Credits" type="Control" parent="."]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -176,12 +177,13 @@ scale = Vector2(0.3, 0.3)
 texture = ExtResource("11_l46s5")
 
 [node name="CreditsCloseButton" type="TextureButton" parent="Credits"]
+layout_mode = 0
 offset_left = 46.0
 offset_top = 480.0
-offset_right = 1324.0
-offset_bottom = 1235.0
-scale = Vector2(0.17, 0.17)
-texture_normal = ExtResource("2_5wi32")
+offset_right = 2279.0
+offset_bottom = 1805.0
+scale = Vector2(0.09, 0.09)
+texture_normal = ExtResource("12_f0n8o")
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="TutorialButton" to="." method="_on_tutorial_button_pressed"]
