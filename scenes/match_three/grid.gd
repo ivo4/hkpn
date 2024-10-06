@@ -149,7 +149,7 @@ func check_for_matches():
 	for tileMatch in matches:
 		var count = tileMatch.size()
 		var color = tileMatch[0].color
-		emit_signal("matched", count, color)
+		matched.emit(count, color)
 
 		# TODO remove
 		print("Matched ", count, " ", Enums.color_to_string(color))
@@ -159,7 +159,7 @@ func check_for_matches():
 			animation_count += 1
 
 			if tile.icon != Enums.TileIcon.NONE:
-				emit_signal("icon_collected", tile.icon)
+				icon_collected.emit(tile.icon)
 
 	# TODO if no matches, check whether any matches are possible to make.
 	# If not, shuffle the board? Or game over.

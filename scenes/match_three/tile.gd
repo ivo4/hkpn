@@ -2,9 +2,9 @@ extends Area2D
 
 class_name Tile
 
-signal drag_started
-signal movement_ended
-signal disappeared
+signal drag_started(tile: Tile)
+signal movement_ended(tile: Tile)
+signal disappeared(tile: Tile)
 
 var index: Vector2
 var color: Enums.TileColor = Enums.get_random_tile_color()
@@ -35,7 +35,7 @@ func _on_input_event(_viewport: Viewport, event: InputEvent, _shape_idx: int):
 			if event.pressed:
 				is_dragging = true
 				drag_start_pos = event.position
-				emit_signal("drag_started", self)
+				drag_started.emit(self)
 				z_index = 1
 
 func on_drag_end():
@@ -50,12 +50,12 @@ func _process(delta: float):
 
 		if position == moving_to:
 			is_moving = false
-			emit_signal("movement_ended", self)
+			movement_ended.emit(self)
 			z_index = 0
 
 	if is_disappearing:
 		modulate.a -= disappear_speed * delta
 
 		if modulate.a <= 0:
-			emit_signal("disappeared", self)
+			disappeared.emit(self)
 			queue_free()
