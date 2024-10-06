@@ -8,11 +8,11 @@ signal annoyance_filled
 
 var current_annoyance_value: float = 0
 
-var headi_1: Image = Image.load_from_file("res://assets/characters/head1.png")
-var headi_2: Image = Image.load_from_file("res://assets/characters/head1.2.png")
-var headi_3: Image = Image.load_from_file("res://assets/characters/head1.3.png")
-var headi_4: Image = Image.load_from_file("res://assets/characters/head1.4.png")
-var headi_5: Image = Image.load_from_file("res://assets/characters/head1.5.png")
+var headi_1: Image = preload("res://assets/characters/head1.png").get_image()
+var headi_2: Image = preload("res://assets/characters/head1.2.png").get_image()
+var headi_3: Image = preload("res://assets/characters/head1.3.png").get_image()
+var headi_4: Image = preload("res://assets/characters/head1.4.png").get_image()
+var headi_5: Image = preload("res://assets/characters/head1.5.png").get_image()
 
 func _ready() -> void:
 	slider.max_value = max_annoyance_value
