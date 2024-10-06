@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cm5fyt4do7c2o" path="res://assets/ui/main-background.png" id="2_icvpt"]
 [ext_resource type="PackedScene" uid="uid://1w71n7uatf7b" path="res://scenes/fight_game/fight_game.tscn" id="3_ygm8n"]
 [ext_resource type="PackedScene" uid="uid://c7lk6ud4k38j0" path="res://scenes/main_game/annoyance_meter.tscn" id="4_yric5"]
-[ext_resource type="PackedScene" path="res://scenes/main_game/powerup_button.tscn" id="5_fn8f8"]
+[ext_resource type="PackedScene" uid="uid://lfv6cpmbq331" path="res://scenes/main_game/powerup_button.tscn" id="5_fn8f8"]
 [ext_resource type="Texture2D" uid="uid://bwaof5r2yjelm" path="res://assets/sprites/icon-bugspray.png" id="6_adfyx"]
 [ext_resource type="Texture2D" uid="uid://dci36xbj1ir4r" path="res://assets/sprites/icon-zapper.png" id="7_8cfbx"]
 [ext_resource type="Texture2D" uid="uid://ctmdm2sx5pn6u" path="res://assets/sprites/tile-yellow.png" id="8_ay7me"]
