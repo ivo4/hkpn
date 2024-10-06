@@ -5,6 +5,17 @@ extends Area2D
 signal matched(count: int, color: Enums.TileColor)
 signal icon_collected(icon: Enums.TileIcon)
 
+@onready var audio = $AudioStreamPlayer
+
+const slide_sounds = [
+	preload("res://assets/audio/sfx/ruudu_slide1.wav"),
+	preload("res://assets/audio/sfx/ruudu_slide2.wav"),
+	preload("res://assets/audio/sfx/ruudu_slide3.wav"),
+	preload("res://assets/audio/sfx/ruudu_slide4.wav"),
+]
+
+var slide_sound_index: int = 0
+
 const rows: int = 7
 const columns: int = 7
 const tile_size: int = 64
@@ -43,6 +54,10 @@ func _on_tile_drag_started(tile: Tile):
 	if !animation_count:
 		dragged_tile = tile
 		set_process_input(true)
+
+		audio.stream = slide_sounds[slide_sound_index]
+		slide_sound_index = (slide_sound_index + 1) % slide_sounds.size()
+		audio.play()
 
 func _on_tile_movement_ended(_tile: Tile):
 	animation_count -= 1
