@@ -11,6 +11,10 @@ var slap_attack: PackedScene = preload("res://scenes/fight_game/attacks/slap.tsc
 var spray_attack: PackedScene = preload("res://scenes/fight_game/attacks/spray.tscn")
 var flame_attack: PackedScene = preload("res://scenes/fight_game/attacks/flame.tscn")
 
+var boy_sprite1: Texture = preload("res://assets/characters/boy-1.png")
+var boy_sprite2: Texture = preload("res://assets/characters/boy-2.png")
+var boy_sprite3: Texture = preload("res://assets/characters/boy-3.png")
+
 var current_weapon: Enums.WEAPON = Enums.WEAPON.SLAP
 var current_attack
 
@@ -110,3 +114,12 @@ func _on_zapper_depleted() -> void:
 	for child in get_children():
 		if child is Mosquito:
 			child.set_target(get_human_target_pos())
+
+
+func update_annoyance(value: float) -> void:
+	if value >= 66:
+		$Human/HumanSprite.texture = boy_sprite3
+	elif value >= 33:
+		$Human/HumanSprite.texture = boy_sprite2
+	else:
+		$Human/HumanSprite.texture = boy_sprite1
