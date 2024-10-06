@@ -28,6 +28,7 @@ offset_right = 549.0
 offset_bottom = 547.0
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
 handle_input_locally = false
 physics_object_picking = true
 render_target_update_mode = 4
@@ -38,10 +39,12 @@ render_target_update_mode = 4
 offset_left = 619.0
 offset_top = 24.0
 offset_right = 1131.0
-offset_bottom = 536.0
+offset_bottom = 624.0
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer2"]
+transparent_bg = true
 handle_input_locally = false
+size = Vector2i(512, 600)
 render_target_update_mode = 4
 
 [node name="FightGame" parent="SubViewportContainer2/SubViewport" instance=ExtResource("3_ygm8n")]
