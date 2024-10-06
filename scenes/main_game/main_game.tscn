@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://fthb7bhebrxs"]
+[gd_scene load_steps=17 format=3 uid="uid://fthb7bhebrxs"]
 
 [ext_resource type="Script" path="res://scenes/main_game/main_game.gd" id="1_q5wl0"]
 [ext_resource type="PackedScene" uid="uid://b15db2i8qrcjd" path="res://scenes/match_three/match_three.tscn" id="2_2yqlu"]
@@ -16,7 +16,6 @@
 [ext_resource type="Texture2D" uid="uid://jwn7rgthufpa" path="res://assets/sprites/icon-cream.png" id="12_jhq1n"]
 [ext_resource type="Texture2D" uid="uid://dwrxh02xwjvhb" path="res://assets/sprites/glow-cream.png" id="13_0c8k8"]
 [ext_resource type="Texture2D" uid="uid://bfmo8ylx20yk1" path="res://assets/sprites/glow-flame.png" id="15_mdfqi"]
-[ext_resource type="Texture2D" uid="uid://bj8mqsihtpmpw" path="res://assets/ui/irritation_label.png" id="17_stmip"]
 
 [node name="MainGame" type="Node2D"]
 script = ExtResource("1_q5wl0")
@@ -112,12 +111,6 @@ autoplay = true
 bus = &"Music"
 
 [node name="Timer" type="Timer" parent="."]
-
-[node name="IrritationLabel" type="Sprite2D" parent="."]
-position = Vector2(645, 284)
-rotation = -1.38165
-scale = Vector2(0.182329, 0.182329)
-texture = ExtResource("17_stmip")
 
 [connection signal="icon_collected" from="SubViewportContainer/SubViewport/MatchThree" to="." method="_on_match_three_icon_collected"]
 [connection signal="matched" from="SubViewportContainer/SubViewport/MatchThree" to="." method="_on_match_three_matched"]
