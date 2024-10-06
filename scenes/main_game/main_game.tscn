@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://fthb7bhebrxs"]
+[gd_scene load_steps=10 format=3 uid="uid://fthb7bhebrxs"]
 
 [ext_resource type="Script" path="res://scenes/main_game/main_game.gd" id="1_q5wl0"]
 [ext_resource type="PackedScene" uid="uid://b15db2i8qrcjd" path="res://scenes/match_three/match_three.tscn" id="2_2yqlu"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" path="res://scenes/main_game/powerup_button.tscn" id="5_fn8f8"]
 [ext_resource type="Texture2D" uid="uid://bwaof5r2yjelm" path="res://assets/sprites/icon-bugspray.png" id="6_adfyx"]
 [ext_resource type="Texture2D" uid="uid://dci36xbj1ir4r" path="res://assets/sprites/icon-zapper.png" id="7_8cfbx"]
+[ext_resource type="Texture2D" uid="uid://ctmdm2sx5pn6u" path="res://assets/sprites/tile-yellow.png" id="8_ay7me"]
 [ext_resource type="Texture2D" uid="uid://c78rd37qqevru" path="res://assets/sprites/icon-fire.png" id="8_rmfes"]
 
 [node name="MainGame" type="Node2D"]
@@ -54,15 +55,17 @@ button_texture = ExtResource("7_8cfbx")
 
 [node name="SoothingCreamPowerupButton" parent="." instance=ExtResource("5_fn8f8")]
 position = Vector2(275, 538)
-scale = Vector2(0.038, 0.038)
+scale = Vector2(0.144, 0.144)
 max_value = 6
 current_value = 0
-button_texture = ExtResource("8_rmfes")
+button_texture = ExtResource("8_ay7me")
 
 [node name="FlamePowerupButton" parent="." instance=ExtResource("5_fn8f8")]
 position = Vector2(378, 536)
+scale = Vector2(0.038, 0.038)
 max_value = 12
 current_value = 12
+button_texture = ExtResource("8_rmfes")
 
 [connection signal="matched" from="SubViewportContainer/SubViewport/MatchThree" to="." method="_on_match_three_matched"]
 [connection signal="damage" from="SubViewportContainer2/SubViewport/FightGame" to="." method="_on_fight_game_damage"]
