@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://d2ec2cjsr6ijd"]
+[gd_scene load_steps=8 format=3 uid="uid://d3bgtja488n7p"]
 
-[ext_resource type="Texture2D" uid="uid://cvh2crc282wj1" path="res://assets/sprites/flame1.png" id="1_36318"]
+[ext_resource type="Texture2D" uid="uid://bra1g583abyte" path="res://assets/sprites/flame-stream.png" id="1_32j4g"]
+[ext_resource type="Texture2D" uid="uid://bjitu0q4q7ace" path="res://assets/sprites/flamethrower.png" id="1_t4jev"]
 [ext_resource type="AudioStream" uid="uid://bui54nujstnh6" path="res://assets/audio/music/flamethrower_theme.wav" id="2_c42l4"]
 [ext_resource type="AudioStream" uid="uid://d0dgj8ecocex1" path="res://assets/audio/music/flamethrower_sfx.wav" id="3_v8uk8"]
 
@@ -27,14 +28,6 @@ func _on_kill_area_body_entered(body: Node2D) -> void:
 	body.queue_free()
 	mosquito_burned.emit()
 "
-
-[sub_resource type="Gradient" id="Gradient_uw4t0"]
-colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_t5eoa"]
-gradient = SubResource("Gradient_uw4t0")
-width = 32
-height = 192
 
 [sub_resource type="Animation" id="Animation_og8gp"]
 resource_name = "attack"
@@ -63,13 +56,15 @@ _data = {
 script = SubResource("GDScript_wlssx")
 
 [node name="Weapon" type="Sprite2D" parent="."]
-position = Vector2(0, -96)
-texture = SubResource("GradientTexture2D_t5eoa")
+position = Vector2(-0.999998, -19)
+rotation = -0.829031
+scale = Vector2(0.0740475, 0.0740475)
+texture = ExtResource("1_t4jev")
 
 [node name="Flame1" type="Sprite2D" parent="."]
-position = Vector2(0, -285)
-scale = Vector2(0.220951, 0.220951)
-texture = ExtResource("1_36318")
+position = Vector2(-3, -273.556)
+scale = Vector2(0.103704, 0.103704)
+texture = ExtResource("1_32j4g")
 
 [node name="KillArea" type="Area2D" parent="."]
 collision_layer = 0
